@@ -1,0 +1,491 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LUMI Decorações - Locação de decoração para festas de aniversário infantil em Curitiba e Pinhais. Temas encantadores, montagem e desmontagem inclusos. Solicite seu orçamento!">
+<title>LUMI Decorações | Festas Infantis em Curitiba e Pinhais</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="container">
+    <a href="#" class="logo">
+      <span class="logo__icon">✨</span>
+      <div>
+        <div class="logo__text">LUMI <span>Decorações</span></div>
+        <div class="logo__sub">Festas Infantis</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <ul class="nav__list">
+        <li><a href="#temas" class="nav__link">Temas</a></li>
+        <li><a href="#como-funciona" class="nav__link">Como Funciona</a></li>
+        <li><a href="#galeria" class="nav__link">Galeria</a></li>
+        <li><a href="#depoimentos" class="nav__link">Depoimentos</a></li>
+      </ul>
+      <a href="https://wa.me/5541998445947?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20orçamento." class="btn-cta btn-cta--sm nav__cta" target="_blank">Solicitar Orçamento</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#temas">Temas</a>
+  <a href="#como-funciona">Como Funciona</a>
+  <a href="#galeria">Galeria</a>
+  <a href="#depoimentos">Depoimentos</a>
+  <a href="https://wa.me/5541998445947?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20orçamento." class="btn-cta">Solicitar Orçamento</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero__decor hero__decor--1"></div>
+  <div class="hero__decor hero__decor--2"></div>
+  <div class="hero__decor hero__decor--3"></div>
+  <div class="hero__decor hero__decor--4"></div>
+  <div class="container">
+    <div class="hero__content">
+      <div class="hero__badge">🎈 Curitiba e Pinhais</div>
+      <h1 class="hero__title">Transformamos o sonho do seu filho em uma <span class="highlight">festa inesquecível</span></h1>
+      <p class="hero__desc">Decoração encantadora, montagem e desmontagem inclusos. Você só precisa aparecer e celebrar!</p>
+      <div class="hero__actions">
+        <a href="https://wa.me/5541998445947?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20orçamento." class="btn-cta btn-cta--lg btn-whatsapp" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.134.558 4.133 1.532 5.874L.057 23.886a.5.5 0 00.606.641l6.218-1.625A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.563 9.563 0 01-4.861-1.327l-.349-.207-3.617.945.974-3.514-.228-.361A9.555 9.555 0 012.4 12C2.4 6.699 6.699 2.4 12 2.4S21.6 6.699 21.6 12 17.301 21.6 12 21.6z"/></svg>
+          Solicitar Orçamento
+        </a>
+        <a href="#temas" class="btn-outline">Ver Temas 🎉</a>
+      </div>
+    </div>
+    <div class="hero__image">
+      <img src="img/hero.png" alt="Festa infantil decorada pela LUMI Decorações" loading="eager">
+    </div>
+  </div>
+</section>
+
+<!-- TEMAS -->
+<section class="section section--white" id="temas">
+  <div class="container">
+    <div class="section__header fade-up">
+      <span class="section__subtitle">Nossos Temas</span>
+      <h2>Escolha o tema perfeito para a festa</h2>
+      <p>16 temas encantadores para crianças de 1 a 10 anos. Cada kit inclui toda a decoração montada e desmontada por nós!</p>
+    </div>
+    <div class="theme-filters fade-up">
+      <button class="theme-filters__btn active" data-filter="todos">Todos</button>
+      <button class="theme-filters__btn" data-filter="meninas">Meninas</button>
+      <button class="theme-filters__btn" data-filter="meninos">Meninos</button>
+      <button class="theme-filters__btn" data-filter="unissex">Unissex</button>
+    </div>
+    <div class="theme-grid">
+
+      <div class="theme-card fade-up" data-category="unissex">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#ff6b9d,#c44dff)">
+          <span class="theme-card__placeholder">🎵</span>
+          <span class="theme-card__badge">3–10 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">Trolls</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Trolls.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div class="theme-card fade-up fade-up-delay-1" data-category="meninos">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#43a047,#1b5e20)">
+          <span class="theme-card__placeholder">💚</span>
+          <span class="theme-card__badge">2–10 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">Hulk</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Hulk.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div class="theme-card fade-up fade-up-delay-2" data-category="meninos">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#e53935,#1565c0)">
+          <span class="theme-card__placeholder">🕷️</span>
+          <span class="theme-card__badge">2–10 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">Homem Aranha</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Homem%20Aranha.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div class="theme-card fade-up fade-up-delay-3" data-category="meninas">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#f06292,#ab47bc)">
+          <span class="theme-card__placeholder">🎀</span>
+          <span class="theme-card__badge">3–8 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">LOL Surprise</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20LOL%20Surprise.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div class="theme-card fade-up" data-category="meninos">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#6200ea,#00bcd4)">
+          <span class="theme-card__placeholder">🎮</span>
+          <span class="theme-card__badge">6–12 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">Fortnite</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Fortnite.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div class="theme-card fade-up fade-up-delay-1" data-category="meninos">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#e53935,#fdd835)">
+          <span class="theme-card__placeholder">🐉</span>
+          <span class="theme-card__badge">4–10 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">Ninjago</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Ninjago.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div class="theme-card fade-up fade-up-delay-2" data-category="meninos">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#f57c00,#c62828)">
+          <span class="theme-card__placeholder">🦾</span>
+          <span class="theme-card__badge">3–10 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">Homem de Ferro</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Homem%20de%20Ferro.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div class="theme-card fade-up fade-up-delay-3" data-category="unissex">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#ff5722,#795548)">
+          <span class="theme-card__placeholder">🟥</span>
+          <span class="theme-card__badge">5–12 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">Roblox</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Roblox.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div class="theme-card fade-up" data-category="meninos">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#fdd835,#e53935)">
+          <span class="theme-card__placeholder">⚡</span>
+          <span class="theme-card__badge">2–10 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">Flash</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Flash.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div class="theme-card fade-up fade-up-delay-1" data-category="meninos">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#ff6f00,#212121)">
+          <span class="theme-card__placeholder">🔥</span>
+          <span class="theme-card__badge">7–14 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">Free Fire</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Free%20Fire.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div class="theme-card fade-up fade-up-delay-2" data-category="meninos">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#2e7d32,#1b5e20)">
+          <span class="theme-card__placeholder">⚽</span>
+          <span class="theme-card__badge">3–12 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">Palmeiras</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Palmeiras.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div class="theme-card fade-up fade-up-delay-3" data-category="unissex">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#e91e63,#ff9800)">
+          <span class="theme-card__placeholder">🎲</span>
+          <span class="theme-card__badge">5–12 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">Stumble Guys</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Stumble%20Guys.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div class="theme-card fade-up" data-category="meninas">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#f06292,#fce4ec)">
+          <span class="theme-card__placeholder">🍉</span>
+          <span class="theme-card__badge">1–8 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">Magali</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Magali.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div class="theme-card fade-up fade-up-delay-1" data-category="unissex">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#8d6e63,#d7ccc8)">
+          <span class="theme-card__placeholder">🦫</span>
+          <span class="theme-card__badge">1–10 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">Capivara</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Capivara.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div class="theme-card fade-up fade-up-delay-2" data-category="unissex">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#26c6da,#5c6bc0)">
+          <span class="theme-card__placeholder">💙</span>
+          <span class="theme-card__badge">1–8 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">Stitch</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Stitch.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+      <div class="theme-card fade-up fade-up-delay-3" data-category="meninas">
+        <div class="theme-card__image" style="background:linear-gradient(135deg,#f8bbd0,#ce93d8)">
+          <span class="theme-card__placeholder">🎂</span>
+          <span class="theme-card__badge">1–5 anos</span>
+        </div>
+        <div class="theme-card__content">
+          <h3 class="theme-card__title">Bento Cake</h3>
+          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Bento%20Cake.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank">Solicitar Orçamento</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="section section--cream" id="como-funciona">
+  <div class="container">
+    <div class="section__header fade-up">
+      <span class="section__subtitle">Simples assim</span>
+      <h2>Festa dos sonhos em 3 passos</h2>
+      <p>Cuidamos de tudo para você focar no que realmente importa: curtir cada momento com seu filho.</p>
+    </div>
+    <div class="steps">
+      <div class="step fade-up">
+        <div class="step__number">1</div>
+        <span class="step__icon">🎨</span>
+        <h3 class="step__title">Escolha o Tema</h3>
+        <p class="step__desc">Navegue pelos nossos 16 temas e escolha o favorito da criança. Nos conte a data e o local da festa.</p>
+      </div>
+      <div class="step fade-up fade-up-delay-1">
+        <div class="step__number">2</div>
+        <span class="step__icon">📱</span>
+        <h3 class="step__title">Agende pelo WhatsApp</h3>
+        <p class="step__desc">Receba seu orçamento personalizado em minutos. Confirmamos tudo rapidinho pelo WhatsApp, sem burocracia.</p>
+      </div>
+      <div class="step fade-up fade-up-delay-2">
+        <div class="step__number">3</div>
+        <span class="step__icon">🎉</span>
+        <h3 class="step__title">Celebre sem Preocupação</h3>
+        <p class="step__desc">Montamos a decoração antes da festa e desmontamos depois. Você chega, festeja e vai embora. Simples!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section class="section section--white" id="galeria">
+  <div class="container">
+    <div class="section__header fade-up">
+      <span class="section__subtitle">Inspiração</span>
+      <h2>Festas que encantam e inspiram</h2>
+      <p>Cada festa é única. Veja alguns dos momentos mágicos que já criamos para famílias de Curitiba e Pinhais.</p>
+    </div>
+    <div class="gallery-grid fade-up">
+      <div class="gallery-item" style="background:linear-gradient(135deg,#f8bbd0,#f3e5f5);min-height:300px"><span class="gallery-item__placeholder">🎈</span></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#bbdefb,#e3f2fd)"><span class="gallery-item__placeholder">⭐</span></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#fff9c4,#fff3e0)"><span class="gallery-item__placeholder">🎂</span></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#e8f5e9,#f1f8e9)"><span class="gallery-item__placeholder">🎊</span></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#fce4ec,#ffe0b2)"><span class="gallery-item__placeholder">🦄</span></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#ede7f6,#e8eaf6)"><span class="gallery-item__placeholder">✨</span></div>
+    </div>
+    <div style="text-align:center;margin-top:2rem" class="fade-up">
+      <a href="https://www.instagram.com/lumidecoracoesoficisl" target="_blank" class="btn-outline">📸 Ver mais no Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="section section--cream" id="beneficios">
+  <div class="container">
+    <div class="section__header fade-up">
+      <span class="section__subtitle">Nossos Diferenciais</span>
+      <h2>Por que os pais confiam na LUMI?</h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card fade-up">
+        <div class="benefit-card__icon">✨</div>
+        <div>
+          <h3 class="benefit-card__title">Decoração Encantadora</h3>
+          <p class="benefit-card__desc">Cada detalhe é pensado para criar um ambiente mágico e inesquecível para as crianças.</p>
+        </div>
+      </div>
+      <div class="benefit-card fade-up fade-up-delay-1">
+        <div class="benefit-card__icon">⏱️</div>
+        <div>
+          <h3 class="benefit-card__title">Praticidade Total</h3>
+          <p class="benefit-card__desc">Montamos e desmontamos tudo. Você não precisa se preocupar com nada além de curtir a festa.</p>
+        </div>
+      </div>
+      <div class="benefit-card fade-up fade-up-delay-2">
+        <div class="benefit-card__icon">💰</div>
+        <div>
+          <h3 class="benefit-card__title">Economia Inteligente</h3>
+          <p class="benefit-card__desc">Festa linda sem precisar comprar e guardar decoração. Pague só pelo que usar no dia.</p>
+        </div>
+      </div>
+      <div class="benefit-card fade-up fade-up-delay-3">
+        <div class="benefit-card__icon">💛</div>
+        <div>
+          <h3 class="benefit-card__title">Atendimento Acolhedor</h3>
+          <p class="benefit-card__desc">Do primeiro contato ao fim da festa, estamos junto. Atendimento humano e carinhoso.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="section section--white" id="depoimentos">
+  <div class="container">
+    <div class="section__header fade-up">
+      <span class="section__subtitle">Depoimentos</span>
+      <h2>O que os pais dizem sobre nós</h2>
+      <p>Mais de 200 festas realizadas e famílias encantadas em Curitiba e Pinhais.</p>
+    </div>
+    <div class="testimonials-wrapper fade-up">
+      <div class="testimonials-track">
+        <div class="testimonial-card">
+          <div class="testimonial-card__inner">
+            <div class="testimonial-card__stars">★★★★★</div>
+            <p class="testimonial-card__text">"A festa da minha filha ficou perfeita! A equipe da LUMI montou tudo lindo e eu não precisei me preocupar com nada. Vai direto no coração!"</p>
+            <div class="testimonial-card__author">Ana Carolina M.</div>
+            <div class="testimonial-card__role">Mãe da Maria Eduarda, 4 anos — Pinhais</div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-card__inner">
+            <div class="testimonial-card__stars">★★★★★</div>
+            <p class="testimonial-card__text">"Contratei o tema Homem Aranha pro meu filho e ele enlouqueceu! A decoração era incrível e o preço super justo. Super recomendo!"</p>
+            <div class="testimonial-card__author">Rodrigo S.</div>
+            <div class="testimonial-card__role">Pai do Davi, 6 anos — Curitiba</div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-card__inner">
+            <div class="testimonial-card__stars">★★★★★</div>
+            <p class="testimonial-card__text">"Atendimento maravilhoso do começo ao fim. Elas chegaram na hora certa, montaram rápido e desmontaram sem deixar nada pra trás. Adorei!"</p>
+            <div class="testimonial-card__author">Fernanda L.</div>
+            <div class="testimonial-card__role">Mãe da Sofia, 3 anos — Curitiba</div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-card__inner">
+            <div class="testimonial-card__stars">★★★★★</div>
+            <p class="testimonial-card__text">"Escolhi o tema Stitch e ficou encantador! Minha filha ficou com os olhos brilhando. A LUMI transformou o sonho dela em realidade. Obrigada!"</p>
+            <div class="testimonial-card__author">Juliana P.</div>
+            <div class="testimonial-card__role">Mãe da Isabela, 5 anos — Pinhais</div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-card__inner">
+            <div class="testimonial-card__stars">★★★★★</div>
+            <p class="testimonial-card__text">"Segunda vez que contrato a LUMI e mais uma vez ficou perfeito. O tema Roblox deixou meu filho muito feliz. Atendimento nota 10!"</p>
+            <div class="testimonial-card__author">Marcos V.</div>
+            <div class="testimonial-card__role">Pai do Lucas, 8 anos — Curitiba</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonials-dots fade-up">
+      <button class="testimonials-dots__dot active" aria-label="Depoimento 1"></button>
+      <button class="testimonials-dots__dot" aria-label="Depoimento 2"></button>
+      <button class="testimonials-dots__dot" aria-label="Depoimento 3"></button>
+      <button class="testimonials-dots__dot" aria-label="Depoimento 4"></button>
+      <button class="testimonials-dots__dot" aria-label="Depoimento 5"></button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="section cta-final" id="orcamento">
+  <span class="cta-final__decor cta-final__decor--1">🎈</span>
+  <span class="cta-final__decor cta-final__decor--2">⭐</span>
+  <span class="cta-final__decor cta-final__decor--3">🎊</span>
+  <div class="container">
+    <div class="cta-final__content fade-up">
+      <h2>Vamos criar a festa perfeita juntos?</h2>
+      <p>Converse com a gente no WhatsApp e receba seu orçamento em minutos. Atendemos em Curitiba e Pinhais!</p>
+      <a href="https://wa.me/5541998445947?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20orçamento%20para%20uma%20festa%20infantil." class="btn-cta btn-cta--lg btn-whatsapp" target="_blank">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.134.558 4.133 1.532 5.874L.057 23.886a.5.5 0 00.606.641l6.218-1.625A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.563 9.563 0 01-4.861-1.327l-.349-.207-3.617.945.974-3.514-.228-.361A9.555 9.555 0 012.4 12C2.4 6.699 6.699 2.4 12 2.4S21.6 6.699 21.6 12 17.301 21.6 12 21.6z"/></svg>
+        Falar no WhatsApp agora
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="#" class="logo">
+          <span class="logo__icon">✨</span>
+          <div>
+            <div class="logo__text">LUMI <span>Decorações</span></div>
+            <div class="logo__sub" style="color:rgba(255,255,255,.4)">Festas Infantis</div>
+          </div>
+        </a>
+        <p>Transformamos sonhos em festas inesquecíveis. Curitiba e Pinhais.</p>
+        <div class="footer__social">
+          <a href="https://www.instagram.com/lumidecoracoesoficisl" target="_blank" aria-label="Instagram">📸</a>
+          <a href="https://wa.me/5541998445947" target="_blank" aria-label="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer__heading">Links Rápidos</h4>
+        <div class="footer__links">
+          <a href="#temas">Nossos Temas</a>
+          <a href="#como-funciona">Como Funciona</a>
+          <a href="#galeria">Galeria</a>
+          <a href="#depoimentos">Depoimentos</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer__heading">Contato</h4>
+        <div class="footer__contact">
+          <a href="https://wa.me/5541998445947" target="_blank">📱 (41) 99844-5947</a>
+          <a href="https://www.instagram.com/lumidecoracoesoficisl" target="_blank">📸 @lumidecoracoesoficisl</a>
+          <a href="#">📍 Curitiba e Pinhais — PR</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 LUMI Decorações. Todos os direitos reservados.</span>
+      <a href="https://wa.me/5541935000928?text=Olá,%20vim%20através%20do%20site%20da%20LUMI%20Decorações..." class="footer__dev" target="_blank">Desenvolvido por Anderson Telles</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/5541998445947?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20orçamento." class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp">
+  <span class="whatsapp-float__tooltip">Fale conosco!</span>
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.134.558 4.133 1.532 5.874L.057 23.886a.5.5 0 00.606.641l6.218-1.625A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.563 9.563 0 01-4.861-1.327l-.349-.207-3.617.945.974-3.514-.228-.361A9.555 9.555 0 012.4 12C2.4 6.699 6.699 2.4 12 2.4S21.6 6.699 21.6 12 17.301 21.6 12 21.6z"/></svg>
+</a>
+
+<script src="js/main.js"></script>
+</body>
+</html>
