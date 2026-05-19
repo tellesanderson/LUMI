@@ -5,10 +5,108 @@
 document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   initMobileMenu();
-  initThemeFilters();
+  initThemes();
   initTestimonialSlider();
-  initScrollAnimations();
 });
+
+let themes = [];
+
+/* ===== Render Themes Dynamically ===== */
+function initThemes() {
+  const themeGrid = document.getElementById('themeGrid');
+  if (!themeGrid) return;
+
+  if (typeof isFirebaseConfigured !== 'undefined' && isFirebaseConfigured) {
+    // Carrega do Firebase Firestore
+    db.collection('themes').get()
+      .then((querySnapshot) => {
+        let fetchedThemes = [];
+        querySnapshot.forEach((doc) => {
+          fetchedThemes.push({ id: doc.id, ...doc.data() });
+        });
+        
+        if (fetchedThemes.length > 0) {
+          // Ordena por título ou data de criação
+          themes = fetchedThemes.sort((a, b) => {
+            if (a.createdAt && b.createdAt) return a.createdAt - b.createdAt;
+            return a.title.localeCompare(b.title);
+          });
+          renderThemeGrid();
+        } else {
+          console.log("Banco Firestore vazio. Carregando padrões locais...");
+          loadLocalThemes();
+          renderThemeGrid();
+        }
+      })
+      .catch((error) => {
+        console.error("Erro ao carregar do Firestore, usando fallback local:", error);
+        loadLocalThemes();
+        renderThemeGrid();
+      });
+  } else {
+    // Firebase não configurado, roda localmente
+    loadLocalThemes();
+    renderThemeGrid();
+  }
+}
+
+function loadLocalThemes() {
+  const storedThemes = localStorage.getItem('lumi_themes');
+  if (storedThemes) {
+    try {
+      themes = JSON.parse(storedThemes);
+    } catch (e) {
+      console.error("Erro ao carregar temas do localStorage, usando padrões.", e);
+      themes = defaultThemes;
+    }
+  } else {
+    themes = defaultThemes;
+    localStorage.setItem('lumi_themes', JSON.stringify(themes));
+  }
+}
+
+function renderThemeGrid() {
+  const themeGrid = document.getElementById('themeGrid');
+  const themesSubtitle = document.getElementById('themesSubtitle');
+  if (!themeGrid) return;
+
+  themeGrid.innerHTML = '';
+
+  if (themesSubtitle) {
+    themesSubtitle.innerHTML = `<strong>${themes.length} temas</strong> encantadores para crianças de 1 a 10 anos. Cada kit Pegue e Monte vem com toda a decoração completa para você retirar, decorar e devolver!`;
+  }
+
+  themes.forEach((theme, index) => {
+    const delayClass = `fade-up-delay-${index % 4}`;
+    const card = document.createElement('div');
+    card.className = `theme-card fade-up ${delayClass}`;
+    card.dataset.category = theme.category;
+    
+    let imageSrc = theme.image || '';
+    if (!imageSrc) {
+      imageSrc = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="300" height="200" fill="%23F6AFCB"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="'Baloo 2', cursive" font-size="24" fill="white">${theme.title}</text></svg>`;
+    }
+
+    const whatsappMessage = encodeURIComponent(`Olá! Tenho interesse no kit Pegue e Monte do tema ${theme.title}. Gostaria de consultar a disponibilidade para a data...`);
+    const whatsappLink = `https://wa.me/5541998445947?text=${whatsappMessage}`;
+
+    card.innerHTML = `
+      <div class="theme-card__image">
+        <img src="${imageSrc}" alt="Tema ${theme.title}" loading="lazy">
+        <span class="theme-card__badge">${theme.ageRange}</span>
+      </div>
+      <div class="theme-card__content">
+        <h3 class="theme-card__title">${theme.title}</h3>
+        <a href="${whatsappLink}" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Reservar Tema</a>
+      </div>
+    `;
+    themeGrid.appendChild(card);
+  });
+
+  // Inicializa filtros e animações após injetar os cartões
+  initThemeFilters();
+  initScrollAnimations();
+}
 
 /* ===== Sticky Header ===== */
 function initHeader() {

@@ -54,7 +54,7 @@
     <div class="hero__content">
       <div class="hero__badge">🎈 Curitiba e Pinhais</div>
       <h1 class="hero__title">Transformamos o sonho do seu filho em uma <span class="highlight">festa inesquecível</span></h1>
-      <p class="hero__desc">Decoração encantadora, montagem e desmontagem inclusos. Você só precisa aparecer e celebrar!</p>
+      <p class="hero__desc">Kits decorativos completos no estilo Pegue e Monte. Você retira no local, monta com facilidade onde quiser e devolve depois da festa!</p>
       <div class="hero__actions">
         <a href="https://wa.me/5541998445947?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20orçamento." class="btn-cta btn-cta--lg btn-whatsapp" target="_blank" rel="noopener noreferrer">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.134.558 4.133 1.532 5.874L.057 23.886a.5.5 0 00.606.641l6.218-1.625A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.563 9.563 0 01-4.861-1.327l-.349-.207-3.617.945.974-3.514-.228-.361A9.555 9.555 0 012.4 12C2.4 6.699 6.699 2.4 12 2.4S21.6 6.699 21.6 12 17.301 21.6 12 21.6z"/></svg>
@@ -75,183 +75,16 @@
     <div class="section__header fade-up">
       <span class="section__subtitle">Nossos Temas</span>
       <h2>Escolha o tema perfeito para a festa</h2>
-      <p>16 temas encantadores para crianças de 1 a 10 anos. Cada kit inclui toda a decoração montada e desmontada por nós!</p>
+      <p id="themesSubtitle">Carregando temas encantadores para crianças de 1 a 10 anos...</p>
     </div>
-    <div class="theme-filters fade-up">
+    <div class="theme-filters fade-up" id="themeFilters">
       <button class="theme-filters__btn active" data-filter="todos">Todos</button>
       <button class="theme-filters__btn" data-filter="meninas">Meninas</button>
       <button class="theme-filters__btn" data-filter="meninos">Meninos</button>
       <button class="theme-filters__btn" data-filter="unissex">Unissex</button>
     </div>
-    <div class="theme-grid">
-
-      <div class="theme-card fade-up" data-category="unissex">
-        <div class="theme-card__image">
-          <img src="img/themes/trolls.png" alt="Tema Trolls" loading="lazy">
-          <span class="theme-card__badge">3–10 anos</span>
-        </div>
-        <div class="theme-card__content">
-          <h3 class="theme-card__title">Trolls</h3>
-          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Trolls.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-        </div>
-      </div>
-
-      <div class="theme-card fade-up fade-up-delay-1" data-category="meninos">
-        <div class="theme-card__image">
-          <img src="img/themes/hulk.png" alt="Tema Hulk" loading="lazy">
-          <span class="theme-card__badge">2–10 anos</span>
-        </div>
-        <div class="theme-card__content">
-          <h3 class="theme-card__title">Hulk</h3>
-          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Hulk.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-        </div>
-      </div>
-
-      <div class="theme-card fade-up fade-up-delay-2" data-category="meninos">
-        <div class="theme-card__image">
-          <img src="img/themes/homem_aranha.png" alt="Tema Homem Aranha" loading="lazy">
-          <span class="theme-card__badge">2–10 anos</span>
-        </div>
-        <div class="theme-card__content">
-          <h3 class="theme-card__title">Homem Aranha</h3>
-          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Homem%20Aranha.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-        </div>
-      </div>
-
-      <div class="theme-card fade-up fade-up-delay-3" data-category="meninas">
-        <div class="theme-card__image">
-          <img src="img/themes/lol.png" alt="Tema LOL Surprise" loading="lazy">
-          <span class="theme-card__badge">3–8 anos</span>
-        </div>
-        <div class="theme-card__content">
-          <h3 class="theme-card__title">LOL Surprise</h3>
-          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20LOL%20Surprise.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-        </div>
-      </div>
-
-      <div class="theme-card fade-up" data-category="meninos">
-        <div class="theme-card__image">
-          <img src="img/themes/fortnite.png" alt="Tema Fortnite" loading="lazy">
-          <span class="theme-card__badge">6–12 anos</span>
-        </div>
-        <div class="theme-card__content">
-          <h3 class="theme-card__title">Fortnite</h3>
-          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Fortnite.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-        </div>
-      </div>
-
-      <div class="theme-card fade-up fade-up-delay-1" data-category="meninos">
-        <div class="theme-card__image">
-          <img src="img/themes/ninjago.png" alt="Tema Ninjago" loading="lazy">
-          <span class="theme-card__badge">4–10 anos</span>
-        </div>
-        <div class="theme-card__content">
-          <h3 class="theme-card__title">Ninjago</h3>
-          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Ninjago.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-        </div>
-      </div>
-
-      <div class="theme-card fade-up fade-up-delay-2" data-category="meninos">
-        <div class="theme-card__image">
-          <img src="img/themes/homem_ferro.png" alt="Tema Homem de Ferro" loading="lazy">
-          <span class="theme-card__badge">3–10 anos</span>
-        </div>
-        <div class="theme-card__content">
-          <h3 class="theme-card__title">Homem de Ferro</h3>
-          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Homem%20de%20Ferro.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-        </div>
-      </div>
-
-      <div class="theme-card fade-up fade-up-delay-3" data-category="unissex">
-        <div class="theme-card__image">
-          <img src="img/themes/roblox.png" alt="Tema Roblox" loading="lazy">
-          <span class="theme-card__badge">5–12 anos</span>
-        </div>
-        <div class="theme-card__content">
-          <h3 class="theme-card__title">Roblox</h3>
-          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Roblox.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-        </div>
-      </div>
-
-      <div class="theme-card fade-up" data-category="meninos">
-        <div class="theme-card__image">
-          <img src="img/themes/flash.png" alt="Tema Flash" loading="lazy">
-          <span class="theme-card__badge">2–10 anos</span>
-        </div>
-        <div class="theme-card__content">
-          <h3 class="theme-card__title">Flash</h3>
-          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Flash.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-        </div>
-      </div>
-
-      <div class="theme-card fade-up fade-up-delay-1" data-category="meninos">
-        <div class="theme-card__image">
-          <img src="img/themes/freefire.png" alt="Tema Free Fire" loading="lazy">
-          <span class="theme-card__badge">7–14 anos</span>
-        </div>
-        <div class="theme-card__content">
-          <h3 class="theme-card__title">Free Fire</h3>
-          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Free%20Fire.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-        </div>
-      </div>
-
-      <div class="theme-card fade-up fade-up-delay-2" data-category="meninos">
-        <div class="theme-card__image">
-          <img src="img/themes/palmeiras.png" alt="Tema Palmeiras" loading="lazy">
-          <span class="theme-card__badge">3–12 anos</span>
-        </div>
-        <div class="theme-card__content">
-          <h3 class="theme-card__title">Palmeiras</h3>
-          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Palmeiras.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-        </div>
-      </div>
-
-      <div class="theme-card fade-up fade-up-delay-3" data-category="unissex">
-        <div class="theme-card__image">
-          <img src="img/themes/stumbleguys.png" alt="Tema Stumble Guys" loading="lazy">
-          <span class="theme-card__badge">5–12 anos</span>
-        </div>
-        <div class="theme-card__content">
-          <h3 class="theme-card__title">Stumble Guys</h3>
-          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Stumble%20Guys.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-        </div>
-      </div>
-
-      <div class="theme-card fade-up" data-category="meninas">
-        <div class="theme-card__image">
-          <img src="img/themes/magali.png" alt="Tema Magali" loading="lazy">
-          <span class="theme-card__badge">1–8 anos</span>
-        </div>
-        <div class="theme-card__content">
-          <h3 class="theme-card__title">Magali</h3>
-          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Magali.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-        </div>
-      </div>
-
-      <div class="theme-card fade-up fade-up-delay-1" data-category="unissex">
-        <div class="theme-card__image">
-          <img src="img/themes/capivara.png" alt="Tema Capivara" loading="lazy">
-          <span class="theme-card__badge">1–10 anos</span>
-        </div>
-        <div class="theme-card__content">
-          <h3 class="theme-card__title">Capivara</h3>
-          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Capivara.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-        </div>
-      </div>
-
-      <div class="theme-card fade-up fade-up-delay-2" data-category="unissex">
-        <div class="theme-card__image">
-          <img src="img/themes/stitch.png" alt="Tema Stitch" loading="lazy">
-          <span class="theme-card__badge">1–8 anos</span>
-        </div>
-        <div class="theme-card__content">
-          <h3 class="theme-card__title">Stitch</h3>
-          <a href="https://wa.me/5541998445947?text=Olá!%20Tenho%20interesse%20no%20tema%20Stitch.%20Pode%20me%20enviar%20um%20orçamento?" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-        </div>
-      </div>
-
-
-
+    <div class="theme-grid" id="themeGrid">
+      <!-- Os temas serão renderizados dinamicamente via JavaScript -->
     </div>
   </div>
 </section>
@@ -262,26 +95,26 @@
     <div class="section__header fade-up">
       <span class="section__subtitle">Simples assim</span>
       <h2>Festa dos sonhos em 3 passos</h2>
-      <p>Cuidamos de tudo para você focar no que realmente importa: curtir cada momento com seu filho.</p>
+      <p>Decore você mesmo com praticidade, economia e temas apaixonantes.</p>
     </div>
     <div class="steps">
       <div class="step fade-up">
         <div class="step__number">1</div>
         <span class="step__icon">🎨</span>
         <h3 class="step__title">Escolha o Tema</h3>
-        <p class="step__desc">Navegue pelos nossos 16 temas e escolha o favorito da criança. Nos conte a data e o local da festa.</p>
+        <p class="step__desc">Navegue pelo catálogo e escolha o favorito da criança. Nos informe a data do seu evento pelo WhatsApp.</p>
       </div>
       <div class="step fade-up fade-up-delay-1">
         <div class="step__number">2</div>
         <span class="step__icon">📱</span>
-        <h3 class="step__title">Agende pelo WhatsApp</h3>
-        <p class="step__desc">Receba seu orçamento personalizado em minutos. Confirmamos tudo rapidinho pelo WhatsApp, sem burocracia.</p>
+        <h3 class="step__title">Reserve pelo WhatsApp</h3>
+        <p class="step__desc">Receba seu orçamento personalizado em minutos. Confirmamos a disponibilidade e agendamos a sua retirada.</p>
       </div>
       <div class="step fade-up fade-up-delay-2">
         <div class="step__number">3</div>
         <span class="step__icon">🎉</span>
-        <h3 class="step__title">Celebre sem Preocupação</h3>
-        <p class="step__desc">Montamos a decoração antes da festa e desmontamos depois. Você chega, festeja e vai embora. Simples!</p>
+        <h3 class="step__title">Retire, Monte e Devolva</h3>
+        <p class="step__desc">Retire o kit completo em nosso local, monte no espaço da festa e devolva no mesmo ponto após o evento. Simples e super econômico!</p>
       </div>
     </div>
   </div>
@@ -327,8 +160,8 @@
       <div class="benefit-card fade-up fade-up-delay-1">
         <div class="benefit-card__icon">⏱️</div>
         <div>
-          <h3 class="benefit-card__title">Praticidade Total</h3>
-          <p class="benefit-card__desc">Montamos e desmontamos tudo. Você não precisa se preocupar com nada além de curtir a festa.</p>
+          <h3 class="benefit-card__title">Facilidade na Montagem</h3>
+          <p class="benefit-card__desc">Kits práticos e intuitivos de montar. Você retira, monta de forma rápida no local da festa e devolve depois. Sem estresse!</p>
         </div>
       </div>
       <div class="benefit-card fade-up fade-up-delay-2">
@@ -362,7 +195,7 @@
         <div class="testimonial-card">
           <div class="testimonial-card__inner">
             <div class="testimonial-card__stars">★★★★★</div>
-            <p class="testimonial-card__text">"A festa da minha filha ficou perfeita! A equipe da LUMI montou tudo lindo e eu não precisei me preocupar com nada. Vai direto no coração!"</p>
+            <p class="testimonial-card__text">"A festa da minha filha ficou perfeita! O kit Pegue e Monte é super completo, foi muito fácil de montar e devolver. Ficou maravilhoso!"</p>
             <div class="testimonial-card__author">Ana Carolina M.</div>
             <div class="testimonial-card__role">Mãe da Maria Eduarda, 4 anos — Pinhais</div>
           </div>
@@ -378,7 +211,7 @@
         <div class="testimonial-card">
           <div class="testimonial-card__inner">
             <div class="testimonial-card__stars">★★★★★</div>
-            <p class="testimonial-card__text">"Atendimento maravilhoso do começo ao fim. Elas chegaram na hora certa, montaram rápido e desmontaram sem deixar nada pra trás. Adorei!"</p>
+            <p class="testimonial-card__text">"Atendimento maravilhoso. Retirar e devolver o kit foi super tranquilo, as peças são lindas e muito fáceis de organizar no espaço. Adorei!"</p>
             <div class="testimonial-card__author">Fernanda L.</div>
             <div class="testimonial-card__role">Mãe da Sofia, 3 anos — Curitiba</div>
           </div>
@@ -453,6 +286,7 @@
           <a href="#como-funciona">Como Funciona</a>
           <a href="#galeria">Galeria</a>
           <a href="#depoimentos">Depoimentos</a>
+          <a href="admin.html" style="opacity: 0.6; margin-top: 0.5rem; font-size: 0.8rem;">🔒 Login Admin</a>
         </div>
       </div>
       <div>
@@ -477,6 +311,12 @@
   <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.134.558 4.133 1.532 5.874L.057 23.886a.5.5 0 00.606.641l6.218-1.625A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.563 9.563 0 01-4.861-1.327l-.349-.207-3.617.945.974-3.514-.228-.361A9.555 9.555 0 012.4 12C2.4 6.699 6.699 2.4 12 2.4S21.6 6.699 21.6 12 17.301 21.6 12 21.6z"/></svg>
 </a>
 
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<!-- Site Scripts -->
+<script src="js/themes.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
