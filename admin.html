@@ -1052,6 +1052,17 @@
     let currentImageBase64 = '';
     let originalThemeImage = '';
 
+    // Helper to escape HTML characters (XSS Prevention)
+    function escapeHTML(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
     function initDashboard() {
       // UI Bindings
       document.getElementById('addThemeBtn').addEventListener('click', () => openModal());
@@ -1171,6 +1182,9 @@
       filtered.forEach(theme => {
         const tr = document.createElement('tr');
         
+        const safeTitle = escapeHTML(theme.title);
+        const safeAgeRange = escapeHTML(theme.ageRange);
+        const safeCategory = escapeHTML(theme.category);
         let imageSrc = theme.image || '';
         if (!imageSrc) {
           imageSrc = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"><rect width="60" height="60" fill="%23F6AFCB"/></svg>`;
@@ -1178,9 +1192,9 @@
 
         tr.innerHTML = `
           <td><img src="${imageSrc}" class="theme-row-img" alt="Pre-view"></td>
-          <td><strong>${theme.title}</strong></td>
-          <td><span class="badge badge-${theme.category}">${theme.category}</span></td>
-          <td>${theme.ageRange}</td>
+          <td><strong>${safeTitle}</strong></td>
+          <td><span class="badge badge-${safeCategory}">${safeCategory}</span></td>
+          <td>${safeAgeRange}</td>
           <td>
             <div class="actions-cell">
               <button class="btn-icon btn-icon--edit" onclick="editTheme('${theme.id}')" title="Editar Tema">✏️</button>

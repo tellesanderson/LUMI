@@ -11,6 +11,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let themes = [];
 
+// Helper to escape HTML characters (XSS Prevention)
+function escapeHTML(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 /* ===== Render Themes Dynamically ===== */
 function initThemes() {
   const themeGrid = document.getElementById('themeGrid');
@@ -82,9 +93,12 @@ function renderThemeGrid() {
     card.className = `theme-card fade-up ${delayClass}`;
     card.dataset.category = theme.category;
     
+    const safeTitle = escapeHTML(theme.title);
+    const safeAgeRange = escapeHTML(theme.ageRange);
     let imageSrc = theme.image || '';
+    
     if (!imageSrc) {
-      imageSrc = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="300" height="200" fill="%23F6AFCB"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="'Baloo 2', cursive" font-size="24" fill="white">${theme.title}</text></svg>`;
+      imageSrc = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="300" height="200" fill="%23F6AFCB"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="'Baloo 2', cursive" font-size="24" fill="white">${safeTitle}</text></svg>`;
     }
 
     const whatsappMessage = encodeURIComponent(`Olá! Tenho interesse no kit Pegue e Monte do tema ${theme.title}. Gostaria de consultar a disponibilidade para a data...`);
@@ -92,11 +106,11 @@ function renderThemeGrid() {
 
     card.innerHTML = `
       <div class="theme-card__image">
-        <img src="${imageSrc}" alt="Tema ${theme.title}" loading="lazy">
-        <span class="theme-card__badge">${theme.ageRange}</span>
+        <img src="${imageSrc}" alt="Tema ${safeTitle}" loading="lazy">
+        <span class="theme-card__badge">${safeAgeRange}</span>
       </div>
       <div class="theme-card__content">
-        <h3 class="theme-card__title">${theme.title}</h3>
+        <h3 class="theme-card__title">${safeTitle}</h3>
         <a href="${whatsappLink}" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Reservar Tema</a>
       </div>
     `;
