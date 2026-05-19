@@ -22,7 +22,9 @@ if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "SUA_API_KEY" && firebase
   try {
     firebase.initializeApp(firebaseConfig);
     db = firebase.firestore();
-    auth = firebase.auth();
+    if (typeof firebase.auth === 'function') {
+      auth = firebase.auth();
+    }
     isFirebaseConfigured = true;
     console.log("🔥 Firebase conectado com sucesso!");
   } catch (error) {
