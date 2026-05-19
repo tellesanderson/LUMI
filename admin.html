@@ -1051,6 +1051,7 @@
     /* ===== DASHBOARD CRUD CONTROLLER ===== */
     let adminThemes = [];
     let currentImageBase64 = '';
+    let originalThemeImage = '';
 
     function initDashboard() {
       // UI Bindings
@@ -1198,6 +1199,7 @@
       const form = document.getElementById('themeForm');
       form.reset();
       currentImageBase64 = '';
+      originalThemeImage = '';
       document.getElementById('previewBox').innerHTML = '<span>🖼️</span>';
       
       const select = document.getElementById('imageTypeSelect');
@@ -1215,6 +1217,7 @@
           document.getElementById('themeTitle').value = theme.title;
           document.getElementById('themeCategory').value = theme.category;
           document.getElementById('themeAgeRange').value = theme.ageRange;
+          originalThemeImage = theme.image || '';
           
           if (theme.image && theme.image.startsWith('data:image')) {
             currentImageBase64 = theme.image;
@@ -1265,6 +1268,11 @@
         src = currentImageBase64;
       }
 
+      // Se não há nova imagem selecionada, mas há imagem original do tema, usa ela no preview
+      if (!src && originalThemeImage) {
+        src = originalThemeImage;
+      }
+
       if (src) {
         previewBox.innerHTML = `<img src="${src}" alt="Pre-view">`;
       } else {
@@ -1289,6 +1297,11 @@
         image = currentImageBase64;
       }
 
+      // Se for edição e nenhuma imagem nova foi selecionada, mantém a imagem existente
+      if (themeId && !image) {
+        image = originalThemeImage;
+      }
+
       if (themeId) {
         // Edit Mode
         const themeData = { title, category, ageRange, image, updatedAt: Date.now() };
@@ -1302,7 +1315,7 @@
             })
             .catch((error) => {
               console.error("Erro ao atualizar Firestore:", error);
-              alert("Erro ao salvar no Firestore. Verifique suas regras de segurança!");
+              alert("Erro ao salvar no Firestore: " + error.message);
             });
         } else {
           const index = adminThemes.findIndex(t => t.id === themeId);
@@ -1340,7 +1353,7 @@
             })
             .catch((error) => {
               console.error("Erro ao adicionar Firestore:", error);
-              alert("Erro ao cadastrar no Firestore. Verifique suas regras de segurança!");
+              alert("Erro ao cadastrar no Firestore: " + error.message);
             });
         } else {
           adminThemes.push({ id: finalId, ...themeData });
