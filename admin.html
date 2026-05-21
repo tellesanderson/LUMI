@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
   <style>
     /* =============================================
        LUMI ADMIN — Stylesystem
@@ -672,9 +673,26 @@
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    /* =============================================
+       CROPPER STYLES
+       ============================================= */
+    #cropperModal {
+      z-index: 1100;
+    }
+    .cropper-container-wrapper {
+      max-height: 380px; 
+      background-color: #f0f0f0; 
+      overflow: hidden; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      border-radius: var(--radius-md);
+      width: 100%;
+    }
+    #cropperImage {
+      max-width: 100%; 
+      display: block; 
+      max-height: 380px;
     }
   </style>
 </head>
@@ -883,6 +901,28 @@
   </div>
 
   <!-- =============================================
+       CROPPER MODAL (IMAGE RESIZING & CROPPING)
+       ============================================= -->
+  <div class="modal-overlay" id="cropperModal">
+    <div class="modal-box" style="max-width: 550px;">
+      <div class="modal-header">
+        <h3>Recortar e Ajustar Imagem</h3>
+        <span class="modal-close" id="cropperCloseBtn">&times;</span>
+      </div>
+      <div class="modal-body" style="padding: 1rem;">
+        <div class="cropper-container-wrapper">
+          <img id="cropperImage">
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-sec); margin-top: 0.5rem; text-align: center;">Arraste e ajuste a área de corte para focar na decoração (proporção 4:3).</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="cropperCancelBtn">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="cropperSaveBtn">Cortar e Aplicar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============================================
        TOAST NOTIFICATION
        ============================================= -->
   <div class="toast" id="toastNotification">
@@ -894,6 +934,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
   <script src="js/firebase-config.js"></script>
 
   <!-- LOAD THE DEFAULT THEMES SCRIPT -->
@@ -1051,6 +1092,7 @@
     let adminThemes = [];
     let currentImageBase64 = '';
     let originalThemeImage = '';
+    let cropperInstance = null;
 
     // Helper to escape HTML characters (XSS Prevention)
     function escapeHTML(str) {
@@ -1104,6 +1146,11 @@
 
       urlInput.addEventListener('input', updateImagePreview);
       document.getElementById('themeImageFileInput').addEventListener('change', handleImageUpload);
+
+      // Cropper events
+      document.getElementById('cropperCloseBtn').addEventListener('click', closeCropperModal);
+      document.getElementById('cropperCancelBtn').addEventListener('click', closeCropperModal);
+      document.getElementById('cropperSaveBtn').addEventListener('click', applyCroppedImage);
     }
 
     function loadThemesFromStore() {
@@ -1264,10 +1311,64 @@
 
       const reader = new FileReader();
       reader.onload = (event) => {
-        currentImageBase64 = event.target.result;
-        updateImagePreview();
+        const cropperModal = document.getElementById('cropperModal');
+        const cropperImage = document.getElementById('cropperImage');
+        
+        cropperImage.src = event.target.result;
+        cropperModal.classList.add('active');
+
+        // Se houver um cropper anterior, destrói
+        if (cropperInstance) {
+          cropperInstance.destroy();
+        }
+
+        // Inicializa o Cropper.js com proporção 4:3
+        cropperInstance = new Cropper(cropperImage, {
+          aspectRatio: 4 / 3,
+          viewMode: 1, // Restringe a caixa de corte a ficar dentro da imagem
+          dragMode: 'move',
+          autoCropArea: 0.9,
+          restore: false,
+          guides: true,
+          center: true,
+          highlight: false,
+          cropBoxMovable: true,
+          cropBoxResizable: true,
+          toggleDragModeOnDblclick: false
+        });
       };
       reader.readAsDataURL(file);
+    }
+
+    function closeCropperModal() {
+      const cropperModal = document.getElementById('cropperModal');
+      cropperModal.classList.remove('active');
+      if (cropperInstance) {
+        cropperInstance.destroy();
+        cropperInstance = null;
+      }
+      // Limpa o input file para permitir selecionar novamente
+      document.getElementById('themeImageFileInput').value = '';
+    }
+
+    function applyCroppedImage() {
+      if (!cropperInstance) return;
+
+      const canvas = cropperInstance.getCroppedCanvas({
+        width: 600,
+        height: 450,
+        imageSmoothingEnabled: true,
+        imageSmoothingQuality: 'high'
+      });
+
+      if (canvas) {
+        currentImageBase64 = canvas.toDataURL('image/jpeg', 0.8);
+        updateImagePreview();
+        closeCropperModal();
+        showToast('Imagem recortada e otimizada!');
+      } else {
+        alert('Não foi possível processar o recorte da imagem.');
+      }
     }
 
     function updateImagePreview() {
