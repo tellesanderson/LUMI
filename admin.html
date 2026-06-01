@@ -1632,7 +1632,7 @@
           loadReservationsFromStore();
         }).catch(err => {
           console.error(err);
-          alert('Erro ao salvar reserva.');
+          alert('Erro ao salvar reserva: ' + err.message + '\n\nVerifique se a coleção "reservations" possui regras de escrita liberadas nas regras de segurança do seu painel do Firebase Firestore.');
         });
       } else {
         adminReservations.push({ id: 'res_' + Date.now(), ...resData });
