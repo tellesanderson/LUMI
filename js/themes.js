@@ -7,105 +7,105 @@ const defaultThemes = [
     id: "trolls",
     title: "Trolls",
     category: "unissex",
-    ageRange: "3–10 anos",
-    image: "img/themes/trolls.png"
+    coverImage: "img/themes/trolls.png",
+    galleryImages: []
   },
   {
     id: "hulk",
     title: "Hulk",
     category: "meninos",
-    ageRange: "2–10 anos",
-    image: "img/themes/hulk.png"
+    coverImage: "img/themes/hulk.png",
+    galleryImages: []
   },
   {
     id: "homem_aranha",
     title: "Homem Aranha",
     category: "meninos",
-    ageRange: "2–10 anos",
-    image: "img/themes/homem_aranha.png"
+    coverImage: "img/themes/homem_aranha.png",
+    galleryImages: []
   },
   {
     id: "lol",
     title: "LOL Surprise",
     category: "meninas",
-    ageRange: "3–8 anos",
-    image: "img/themes/lol.png"
+    coverImage: "img/themes/lol.png",
+    galleryImages: []
   },
   {
     id: "fortnite",
     title: "Fortnite",
     category: "meninos",
-    ageRange: "6–12 anos",
-    image: "img/themes/fortnite.png"
+    coverImage: "img/themes/fortnite.png",
+    galleryImages: []
   },
   {
     id: "ninjago",
     title: "Ninjago",
     category: "meninos",
-    ageRange: "4–10 anos",
-    image: "img/themes/ninjago.png"
+    coverImage: "img/themes/ninjago.png",
+    galleryImages: []
   },
   {
     id: "homem_ferro",
     title: "Homem de Ferro",
     category: "meninos",
-    ageRange: "3–10 anos",
-    image: "img/themes/homem_ferro.png"
+    coverImage: "img/themes/homem_ferro.png",
+    galleryImages: []
   },
   {
     id: "roblox",
     title: "Roblox",
     category: "unissex",
-    ageRange: "5–12 anos",
-    image: "img/themes/roblox.png"
+    coverImage: "img/themes/roblox.png",
+    galleryImages: []
   },
   {
     id: "flash",
     title: "Flash",
     category: "meninos",
-    ageRange: "2–10 anos",
-    image: "img/themes/flash.png"
+    coverImage: "img/themes/flash.png",
+    galleryImages: []
   },
   {
     id: "freefire",
     title: "Free Fire",
     category: "meninos",
-    ageRange: "7–14 anos",
-    image: "img/themes/freefire.png"
+    coverImage: "img/themes/freefire.png",
+    galleryImages: []
   },
   {
     id: "palmeiras",
     title: "Palmeiras",
     category: "meninos",
-    ageRange: "3–12 anos",
-    image: "img/themes/palmeiras.png"
+    coverImage: "img/themes/palmeiras.png",
+    galleryImages: []
   },
   {
     id: "stumbleguys",
     title: "Stumble Guys",
     category: "unissex",
-    ageRange: "5–12 anos",
-    image: "img/themes/stumbleguys.png"
+    coverImage: "img/themes/stumbleguys.png",
+    galleryImages: []
   },
   {
     id: "magali",
     title: "Magali",
     category: "meninas",
-    ageRange: "1–8 anos",
-    image: "img/themes/magali.png"
+    coverImage: "img/themes/magali.png",
+    galleryImages: []
   },
   {
     id: "capivara",
     title: "Capivara",
     category: "unissex",
-    ageRange: "1–10 anos",
-    image: "img/themes/capivara.png"
+    coverImage: "img/themes/capivara.png",
+    galleryImages: []
   },
   {
     id: "stitch",
     title: "Stitch",
     category: "unissex",
-    ageRange: "1–8 anos",
-    image: "img/themes/stitch.png"
+    coverImage: "img/themes/stitch.png",
+    galleryImages: []
   }
 ];

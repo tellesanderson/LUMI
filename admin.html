@@ -792,13 +792,46 @@
                   <th style="width: 70px;">Imagem</th>
                   <th>Título do Tema</th>
                   <th>Categoria</th>
-                  <th>Faixa Etária</th>
                   <th style="width: 100px; text-align: center;">Ações</th>
                 </tr>
               </thead>
               <tbody id="themesTableBody">
-                <!-- Dynamic rows -->
               </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- RESERVATIONS SECTION -->
+        <div class="content-box" style="margin-top: 2rem;">
+          <div class="content-box__header">
+            <h2>Controle de Disponibilidade (Reservas)</h2>
+          </div>
+          <form id="reservationForm" style="display:flex; gap:10px; align-items:end; margin-bottom:1rem; flex-wrap:wrap;">
+            <div class="form-group" style="margin:0; flex:1; min-width:150px;">
+              <label>Tema</label>
+              <select id="resTheme" required style="width:100%;"></select>
+            </div>
+            <div class="form-group" style="margin:0; flex:1; min-width:150px;">
+              <label>Data</label>
+              <input type="date" id="resDate" required style="width:100%;">
+            </div>
+            <div class="form-group" style="margin:0; flex:2; min-width:200px;">
+              <label>Cliente / Observação</label>
+              <input type="text" id="resNote" placeholder="Nome do cliente..." style="width:100%;">
+            </div>
+            <button type="submit" class="btn btn-primary" style="height:45px;">Registrar</button>
+          </form>
+          <div class="table-wrapper">
+            <table class="themes-table">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Tema</th>
+                  <th>Cliente/Obs</th>
+                  <th style="width: 80px; text-align: center;">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="reservationsTableBody"></tbody>
             </table>
           </div>
         </div>
@@ -806,35 +839,37 @@
 
       <!-- SIDEBAR PUBLISHING / BACKUP -->
       <div>
-        <div class="sync-card">
-          <h3 id="sidebarSyncTitle">📢 Como Publicar no Site?</h3>
-          <p id="sidebarSyncDesc">Como este site é estático, as alterações que você faz aqui ficam salvas de forma rascunho apenas no seu computador. Para colocar as alterações no ar para os clientes, use as opções abaixo:</p>
-          
-          <div class="sync-box" id="jsCodeBox">
-            <div class="sync-box__title">1. Atualizar Código do Site</div>
-            <p style="margin-bottom: 0.5rem; font-size: 0.8rem;">Copie o código abaixo e cole dentro do arquivo <strong>js/themes.js</strong> do seu site no servidor/hospedagem para atualizar permanentemente.</p>
-            <textarea class="textarea-copy" id="jsCodeArea" readonly onclick="this.select()"></textarea>
-            <button class="btn btn-secondary" style="width:100%; font-size:0.85rem;" id="copyJsBtn">📋 Copiar Código</button>
-          </div>
+        <details class="sync-card" style="cursor: pointer;">
+          <summary><h3 id="sidebarSyncTitle" style="display:inline-block; font-size: 1.1rem; margin:0;">⚙️ Configurações Avançadas (Backup)</h3></summary>
+          <div style="margin-top: 1rem;">
+            <p id="sidebarSyncDesc">Como este site é estático, as alterações que você faz aqui ficam salvas de forma rascunho apenas no seu computador. Para colocar as alterações no ar para os clientes, use as opções abaixo:</p>
+            
+            <div class="sync-box" id="jsCodeBox">
+              <div class="sync-box__title">1. Atualizar Código do Site</div>
+              <p style="margin-bottom: 0.5rem; font-size: 0.8rem;">Copie o código abaixo e cole dentro do arquivo <strong>js/themes.js</strong> do seu site no servidor/hospedagem para atualizar permanentemente.</p>
+              <textarea class="textarea-copy" id="jsCodeArea" readonly onclick="this.select()"></textarea>
+              <button class="btn btn-secondary" style="width:100%; font-size:0.85rem;" id="copyJsBtn">📋 Copiar Código</button>
+            </div>
 
-          <div class="sync-box">
-            <div class="sync-box__title" id="backupBoxTitle">2. Backup de Segurança (JSON)</div>
-            <p style="margin-bottom: 0.5rem; font-size: 0.8rem;" id="backupBoxDesc">Salve um arquivo de segurança com todas as suas edições no seu computador.</p>
-            <div class="sync-box__actions">
-              <button class="btn btn-secondary" style="font-size:0.85rem;" id="exportJsonBtn">⬇️ Exportar Backup</button>
-              <label class="btn btn-secondary" style="font-size:0.85rem; cursor:pointer; text-align:center;">
-                ⬆️ Restaurar Backup
-                <input type="file" id="importJsonInput" accept=".json" style="display:none;">
-              </label>
+            <div class="sync-box">
+              <div class="sync-box__title" id="backupBoxTitle">2. Backup de Segurança (JSON)</div>
+              <p style="margin-bottom: 0.5rem; font-size: 0.8rem;" id="backupBoxDesc">Salve um arquivo de segurança com todas as suas edições no seu computador.</p>
+              <div class="sync-box__actions">
+                <button class="btn btn-secondary" style="font-size:0.85rem;" id="exportJsonBtn">⬇️ Exportar Backup</button>
+                <label class="btn btn-secondary" style="font-size:0.85rem; cursor:pointer; text-align:center;">
+                  ⬆️ Restaurar Backup
+                  <input type="file" id="importJsonInput" accept=".json" style="display:none;">
+                </label>
+              </div>
+            </div>
+
+            <div class="sync-box" style="border-color:#ff9e9e; background:#fff8f8;">
+              <div class="sync-box__title" style="color:#e04b4b;" id="resetBoxTitle">3. Restaurar Padrões</div>
+              <p style="margin-bottom: 0.75rem; font-size: 0.8rem;" id="resetBoxDesc">Apaga todas as edições locais e recarrega os 15 temas originais da LUMI Decorações.</p>
+              <button class="btn btn-danger" style="width:100%; font-size:0.85rem;" id="resetDefaultsBtn">⚠️ Restaurar Temas Iniciais</button>
             </div>
           </div>
-
-          <div class="sync-box" style="border-color:#ff9e9e; background:#fff8f8;">
-            <div class="sync-box__title" style="color:#e04b4b;" id="resetBoxTitle">3. Restaurar Padrões</div>
-            <p style="margin-bottom: 0.75rem; font-size: 0.8rem;" id="resetBoxDesc">Apaga todas as edições locais e recarrega os 15 temas originais da LUMI Decorações.</p>
-            <button class="btn btn-danger" style="width:100%; font-size:0.85rem;" id="resetDefaultsBtn">⚠️ Restaurar Temas Iniciais</button>
-          </div>
-        </div>
+        </details>
       </div>
     </main>
   </div>
@@ -866,12 +901,7 @@
           </div>
 
           <div class="form-group">
-            <label for="themeAgeRange">Faixa Etária Recomendada</label>
-            <input type="text" id="themeAgeRange" required placeholder="Ex: 2–8 anos">
-          </div>
-
-          <div class="form-group">
-            <label>Imagem do Tema</label>
+            <label>Capa do Tema</label>
             <select id="imageTypeSelect" style="margin-bottom:0.5rem;">
               <option value="upload">Upload de Imagem Local (Recomendado)</option>
               <option value="url">Link da Imagem na Internet (URL)</option>
@@ -888,8 +918,15 @@
               <div class="image-preview-box" id="previewBox">
                 <span>🖼️</span>
               </div>
-              <p style="font-size:0.75rem; color:var(--text-sec);">Pré-visualização da imagem do tema.</p>
+              <p style="font-size:0.75rem; color:var(--text-sec);">Pré-visualização da capa do tema.</p>
             </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Outras Imagens (Galeria)</label>
+            <input type="file" id="themeGalleryFiles" accept="image/*" multiple>
+            <div id="galleryPreviews" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;"></div>
+            <p style="font-size:0.75rem; color:var(--text-sec); margin-top:5px;">Selecione várias fotos para a galeria.</p>
           </div>
         </div>
         <div class="modal-footer">
@@ -1105,12 +1142,74 @@
         .replace(/'/g, '&#39;');
     }
 
+    // Compresses and resizes an image on a hidden canvas before saving to Base64
+    function compressAndResizeImage(base64Str, maxWidth = 800, maxHeight = 600, quality = 0.7) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.src = base64Str;
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+
+          // Scale dimensions maintaining aspect ratio
+          if (width > height) {
+            if (width > maxWidth) {
+              height = Math.round((height * maxWidth) / width);
+              width = maxWidth;
+            }
+          } else {
+            if (height > maxHeight) {
+              width = Math.round((width * maxHeight) / height);
+              height = maxHeight;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // Return compressed Base64 JPEG
+          resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+        img.onerror = () => {
+          resolve(base64Str);
+        };
+      });
+    }
+
     function initDashboard() {
       // UI Bindings
       document.getElementById('addThemeBtn').addEventListener('click', () => openModal());
       document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
       document.getElementById('modalCancelBtn').addEventListener('click', closeModal);
       document.getElementById('themeForm').addEventListener('submit', handleFormSubmit);
+
+      // Reservations Binding
+      document.getElementById('reservationForm').addEventListener('submit', handleReservationSubmit);
+
+      // Gallery bindings with background compression
+      document.getElementById('themeGalleryFiles').addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
+        showToast('Processando e compactando imagens...');
+        
+        let processedCount = 0;
+        files.forEach(file => {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            compressAndResizeImage(event.target.result, 800, 600, 0.7).then((compressed) => {
+              window.currentGalleryBase64.push(compressed);
+              processedCount++;
+              if (processedCount === files.length) {
+                renderGalleryPreviews();
+                showToast(`${files.length} imagens adicionadas à galeria!`);
+              }
+            });
+          };
+          reader.readAsDataURL(file);
+        });
+      });
 
       // Search & Filters
       document.getElementById('searchInput').addEventListener('input', renderDashboardTable);
@@ -1189,9 +1288,14 @@
 
     function saveThemesToStore() {
       if (!isFb) {
-        localStorage.setItem('lumi_themes', JSON.stringify(adminThemes));
-        updateJsCodeArea();
-        updateStats();
+        try {
+          localStorage.setItem('lumi_themes', JSON.stringify(adminThemes));
+          updateJsCodeArea();
+          updateStats();
+        } catch (e) {
+          console.error("Erro ao salvar no LocalStorage:", e);
+          alert("Erro de Limite Excedido: As imagens adicionadas são muito grandes para a memória local do navegador (limite de 5MB).\n\nPara resolver:\n1. Use imagens mais leves/comprimidas.\n2. Use a opção 'Copiar Código' em 'Configurações Avançadas' para atualizar diretamente o arquivo 'js/themes.js'.\n3. Configure o Firebase Firestore para armazenar dados ilimitados na nuvem.");
+        }
       }
     }
 
@@ -1199,6 +1303,13 @@
       renderDashboardTable();
       updateStats();
       updateJsCodeArea();
+      
+      // Update Reservation Theme Select
+      const resThemeSelect = document.getElementById('resTheme');
+      if (resThemeSelect) {
+        resThemeSelect.innerHTML = adminThemes.map(t => `<option value="${t.id}">${escapeHTML(t.title)}</option>`).join('');
+      }
+      renderReservationsTable();
     }
 
     function updateStats() {
@@ -1230,9 +1341,8 @@
         const tr = document.createElement('tr');
         
         const safeTitle = escapeHTML(theme.title);
-        const safeAgeRange = escapeHTML(theme.ageRange);
         const safeCategory = escapeHTML(theme.category);
-        let imageSrc = theme.image || '';
+        let imageSrc = theme.coverImage || theme.image || '';
         if (!imageSrc) {
           imageSrc = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"><rect width="60" height="60" fill="%23F6AFCB"/></svg>`;
         }
@@ -1241,7 +1351,6 @@
           <td><img src="${imageSrc}" class="theme-row-img" alt="Pre-view"></td>
           <td><strong>${safeTitle}</strong></td>
           <td><span class="badge badge-${safeCategory}">${safeCategory}</span></td>
-          <td>${safeAgeRange}</td>
           <td>
             <div class="actions-cell">
               <button class="btn-icon btn-icon--edit" onclick="editTheme('${theme.id}')" title="Editar Tema">✏️</button>
@@ -1254,6 +1363,24 @@
     }
 
     /* ===== MODAL CONTROLS ===== */
+    window.currentGalleryBase64 = [];
+    
+    window.renderGalleryPreviews = function() {
+      const container = document.getElementById('galleryPreviews');
+      if(!container) return;
+      container.innerHTML = window.currentGalleryBase64.map((b64, i) => `
+        <div style="position:relative; width:60px; height:60px;">
+           <img src="${b64}" style="width:100%; height:100%; object-fit:cover; border-radius:4px;">
+           <button type="button" onclick="removeGalleryImg(${i})" style="position:absolute; top:-5px; right:-5px; background:red; color:white; border:none; border-radius:50%; width:20px; height:20px; cursor:pointer; font-weight:bold; line-height:1; display:flex; align-items:center; justify-content:center;">×</button>
+        </div>
+      `).join('');
+    };
+    
+    window.removeGalleryImg = function(index) {
+      window.currentGalleryBase64.splice(index, 1);
+      renderGalleryPreviews();
+    };
+
     function openModal(themeId = '') {
       const modal = document.getElementById('themeModal');
       const form = document.getElementById('themeForm');
@@ -1261,6 +1388,10 @@
       currentImageBase64 = '';
       originalThemeImage = '';
       document.getElementById('previewBox').innerHTML = '<span>🖼️</span>';
+      
+      window.currentGalleryBase64 = [];
+      document.getElementById('themeGalleryFiles').value = '';
+      renderGalleryPreviews();
       
       const select = document.getElementById('imageTypeSelect');
       const urlInput = document.getElementById('themeImageUrl');
@@ -1276,20 +1407,23 @@
           document.getElementById('editThemeId').value = theme.id;
           document.getElementById('themeTitle').value = theme.title;
           document.getElementById('themeCategory').value = theme.category;
-          document.getElementById('themeAgeRange').value = theme.ageRange;
-          originalThemeImage = theme.image || '';
+          originalThemeImage = theme.coverImage || theme.image || '';
           
-          if (theme.image && theme.image.startsWith('data:image')) {
-            currentImageBase64 = theme.image;
+          if (originalThemeImage && originalThemeImage.startsWith('data:image')) {
+            currentImageBase64 = originalThemeImage;
             select.value = 'upload';
             urlInput.style.display = 'none';
             fileInputContainer.style.display = 'block';
           } else {
-            document.getElementById('themeImageUrl').value = theme.image || '';
+            document.getElementById('themeImageUrl').value = originalThemeImage || '';
             select.value = 'url';
             urlInput.style.display = 'block';
             fileInputContainer.style.display = 'none';
           }
+          
+          window.currentGalleryBase64 = theme.galleryImages ? [...theme.galleryImages] : [];
+          renderGalleryPreviews();
+
           updateImagePreview();
         }
       } else {
@@ -1401,7 +1535,6 @@
       const themeId = document.getElementById('editThemeId').value;
       const title = document.getElementById('themeTitle').value;
       const category = document.getElementById('themeCategory').value;
-      const ageRange = document.getElementById('themeAgeRange').value;
       const imageType = document.getElementById('imageTypeSelect').value;
       
       let image = '';
@@ -1418,7 +1551,7 @@
 
       if (themeId) {
         // Edit Mode
-        const themeData = { title, category, ageRange, image, updatedAt: Date.now() };
+        const themeData = { title, category, coverImage: image, galleryImages: window.currentGalleryBase64, updatedAt: Date.now() };
 
         if (isFb) {
           db.collection('themes').doc(themeId).update(themeData)
@@ -1456,7 +1589,7 @@
           suffix++;
         }
 
-        const themeData = { title, category, ageRange, image, createdAt: Date.now() };
+        const themeData = { title, category, coverImage: image, galleryImages: window.currentGalleryBase64, createdAt: Date.now() };
 
         if (isFb) {
           db.collection('themes').doc(finalId).set(themeData)
@@ -1478,6 +1611,105 @@
         }
       }
     }
+
+    /* ===== RESERVATIONS LOGIC ===== */
+    let adminReservations = [];
+
+    function handleReservationSubmit(e) {
+      e.preventDefault();
+      const themeId = document.getElementById('resTheme').value;
+      const date = document.getElementById('resDate').value;
+      const note = document.getElementById('resNote').value;
+
+      if (!themeId || !date) return;
+
+      const resData = { themeId, date, note, createdAt: Date.now() };
+
+      if (isFb) {
+        db.collection('reservations').add(resData).then(() => {
+          showToast('Reserva registrada!');
+          document.getElementById('reservationForm').reset();
+          loadReservationsFromStore();
+        }).catch(err => {
+          console.error(err);
+          alert('Erro ao salvar reserva.');
+        });
+      } else {
+        adminReservations.push({ id: 'res_' + Date.now(), ...resData });
+        localStorage.setItem('lumi_reservations', JSON.stringify(adminReservations));
+        showToast('Reserva registrada localmente!');
+        document.getElementById('reservationForm').reset();
+        renderReservationsTable();
+      }
+    }
+
+    function loadReservationsFromStore() {
+      if (isFb) {
+        db.collection('reservations').get().then((snap) => {
+          adminReservations = [];
+          snap.forEach(doc => adminReservations.push({ id: doc.id, ...doc.data() }));
+          adminReservations.sort((a,b) => new Date(b.date) - new Date(a.date));
+          renderReservationsTable();
+        });
+      } else {
+        const stored = localStorage.getItem('lumi_reservations');
+        adminReservations = stored ? JSON.parse(stored) : [];
+        adminReservations.sort((a,b) => new Date(b.date) - new Date(a.date));
+        renderReservationsTable();
+      }
+    }
+
+    window.renderReservationsTable = function() {
+      const tbody = document.getElementById('reservationsTableBody');
+      if(!tbody) return;
+      tbody.innerHTML = '';
+      if(adminReservations.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:1rem; color:var(--text-sec);">Nenhuma reserva.</td></tr>`;
+        return;
+      }
+      adminReservations.forEach(res => {
+        const theme = adminThemes.find(t => t.id === res.themeId);
+        const themeName = theme ? theme.title : 'Tema Excluído';
+        
+        // Format date from YYYY-MM-DD to DD/MM/YYYY
+        let dateObj = new Date(res.date + 'T12:00:00');
+        let dateStr = res.date;
+        if(!isNaN(dateObj)) {
+           dateStr = dateObj.toLocaleDateString('pt-BR');
+        }
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${dateStr}</strong></td>
+          <td>${escapeHTML(themeName)}</td>
+          <td>${escapeHTML(res.note)}</td>
+          <td>
+            <button class="btn-icon btn-icon--delete" onclick="deleteReservation('${res.id}')" title="Excluir Reserva">🗑️</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    };
+
+    window.deleteReservation = function(id) {
+      if(!confirm('Deseja excluir esta reserva?')) return;
+      if (isFb) {
+        db.collection('reservations').doc(id).delete().then(() => {
+          showToast('Reserva excluída!');
+          loadReservationsFromStore();
+        });
+      } else {
+        adminReservations = adminReservations.filter(r => r.id !== id);
+        localStorage.setItem('lumi_reservations', JSON.stringify(adminReservations));
+        renderReservationsTable();
+        showToast('Reserva excluída localmente!');
+      }
+    };
+    
+    // Auto-load reservations on startup
+    document.addEventListener('DOMContentLoaded', () => {
+       setTimeout(() => { if(document.getElementById('dashboardContainer').style.display !== 'none') loadReservationsFromStore(); }, 1000);
+    });
 
     /* ===== DELETE THEME ===== */
     window.deleteTheme = function(themeId) {
@@ -1549,7 +1781,7 @@ const defaultThemes = ${JSON.stringify(adminThemes, null, 2)};
       reader.onload = (event) => {
         try {
           const parsed = JSON.parse(event.target.result);
-          if (Array.isArray(parsed) && parsed.every(item => item.id && item.title && item.category && item.ageRange)) {
+          if (Array.isArray(parsed) && parsed.every(item => item.id && item.title && item.category)) {
             if (isFb) {
               if (confirm(`Deseja importar estes ${parsed.length} temas para o seu banco de dados Firestore?`)) {
                 showToast('Importando... Aguarde.');
@@ -1557,8 +1789,8 @@ const defaultThemes = ${JSON.stringify(adminThemes, null, 2)};
                   return db.collection('themes').doc(theme.id).set({
                     title: theme.title,
                     category: theme.category,
-                    ageRange: theme.ageRange,
-                    image: theme.image || '',
+                    coverImage: theme.coverImage || theme.image || '',
+                    galleryImages: theme.galleryImages || [],
                     createdAt: theme.createdAt || (Date.now() + index)
                   });
                 });
@@ -1599,8 +1831,8 @@ const defaultThemes = ${JSON.stringify(adminThemes, null, 2)};
             return db.collection('themes').doc(theme.id).set({
               title: theme.title,
               category: theme.category,
-              ageRange: theme.ageRange,
-              image: theme.image,
+              coverImage: theme.coverImage || theme.image || '',
+              galleryImages: theme.galleryImages || [],
               createdAt: Date.now() + index
             });
           });

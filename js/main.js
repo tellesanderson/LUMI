@@ -94,8 +94,7 @@ function renderThemeGrid() {
     card.dataset.category = theme.category;
     
     const safeTitle = escapeHTML(theme.title);
-    const safeAgeRange = escapeHTML(theme.ageRange);
-    let imageSrc = theme.image || '';
+    let imageSrc = theme.coverImage || theme.image || '';
     
     if (!imageSrc) {
       imageSrc = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="300" height="200" fill="%23F6AFCB"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="'Baloo 2', cursive" font-size="24" fill="white">${safeTitle}</text></svg>`;
@@ -104,13 +103,16 @@ function renderThemeGrid() {
     const whatsappMessage = encodeURIComponent(`Olá! Tenho interesse no kit Pegue e Monte do tema ${theme.title}. Gostaria de consultar a disponibilidade para a data...`);
     const whatsappLink = `https://wa.me/5541998445947?text=${whatsappMessage}`;
 
+    const galleryCount = theme.galleryImages ? theme.galleryImages.length : 0;
+    const galleryIcon = galleryCount > 0 ? `<span class="theme-card__badge">📸 +${galleryCount} fotos</span>` : '';
+
     card.innerHTML = `
-      <div class="theme-card__image">
+      <div class="theme-card__image" onclick="openGallery('${theme.id}')" style="cursor:pointer">
         <img src="${imageSrc}" alt="Tema ${safeTitle}" loading="lazy">
-        <span class="theme-card__badge">${safeAgeRange}</span>
+        ${galleryIcon}
       </div>
       <div class="theme-card__content">
-        <h3 class="theme-card__title">${safeTitle}</h3>
+        <h3 class="theme-card__title" onclick="openGallery('${theme.id}')" style="cursor:pointer">${safeTitle}</h3>
         <a href="${whatsappLink}" class="btn-cta btn-cta--sm" target="_blank" rel="noopener noreferrer">Reservar Tema</a>
       </div>
     `;
@@ -245,3 +247,67 @@ function initScrollAnimations() {
 const style = document.createElement('style');
 style.textContent = `@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}`;
 document.head.appendChild(style);
+
+/* ===== Modal Gallery ===== */
+window.openGallery = function(themeId) {
+  const theme = themes.find(t => t.id === themeId);
+  if (!theme) return;
+  
+  let images = [];
+  if (theme.coverImage) images.push(theme.coverImage);
+  else if (theme.image) images.push(theme.image);
+  
+  if (theme.galleryImages && theme.galleryImages.length > 0) {
+    images = images.concat(theme.galleryImages);
+  }
+
+  if (images.length === 0) return;
+
+  let modal = document.getElementById('galleryModal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'galleryModal';
+    modal.className = 'gallery-modal';
+    document.body.appendChild(modal);
+  }
+
+  let slidesHtml = images.map((img, i) => `
+    <div class="gallery-slide ${i === 0 ? 'active' : ''}">
+      <img src="${img}" alt="Foto ${i+1} do tema">
+    </div>
+  `).join('');
+
+  modal.innerHTML = `
+    <div class="gallery-modal__overlay" onclick="closeGallery()"></div>
+    <div class="gallery-modal__content">
+      <button class="gallery-modal__close" onclick="closeGallery()">×</button>
+      <div class="gallery-slider">
+        ${slidesHtml}
+      </div>
+      ${images.length > 1 ? `
+        <button class="gallery-prev" onclick="changeSlide(-1)">❮</button>
+        <button class="gallery-next" onclick="changeSlide(1)">❯</button>
+      ` : ''}
+    </div>
+  `;
+  
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  window.currentSlideIndex = 0;
+};
+
+window.closeGallery = function() {
+  const modal = document.getElementById('galleryModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+};
+
+window.changeSlide = function(dir) {
+  const slides = document.querySelectorAll('.gallery-slide');
+  if (!slides.length) return;
+  slides[window.currentSlideIndex].classList.remove('active');
+  window.currentSlideIndex = (window.currentSlideIndex + dir + slides.length) % slides.length;
+  slides[window.currentSlideIndex].classList.add('active');
+};
