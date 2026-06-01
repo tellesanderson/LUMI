@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initThemes();
   initTestimonialSlider();
+  initPartyFloatingEffects();
 });
 
 let themes = [];
@@ -311,3 +312,105 @@ window.changeSlide = function(dir) {
   window.currentSlideIndex = (window.currentSlideIndex + dir + slides.length) % slides.length;
   slides[window.currentSlideIndex].classList.add('active');
 };
+
+/* ===== FLOATING PARTY EFFECTS (Balloons & Confetti) ===== */
+function initPartyFloatingEffects() {
+  const container = document.createElement('div');
+  container.id = 'party-effects-container';
+  container.style.position = 'fixed';
+  container.style.top = '0';
+  container.style.left = '0';
+  container.style.width = '100vw';
+  container.style.height = '100vh';
+  container.style.pointerEvents = 'none';
+  container.style.zIndex = '0'; // Behind header and text, above base page bg
+  container.style.overflow = 'hidden';
+  document.body.appendChild(container);
+
+  const colors = ['#F6AFCB', '#8ECDF2', '#F9D976', '#B9A7F5', '#AEE3D6', '#FF7AA2'];
+
+  function createConfetti() {
+    if (document.hidden) return;
+    const confetti = document.createElement('div');
+    
+    const size = Math.random() * 8 + 6;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    
+    confetti.style.width = `${size}px`;
+    confetti.style.height = `${size * (Math.random() > 0.5 ? 1 : 1.5)}px`;
+    confetti.style.background = color;
+    confetti.style.position = 'absolute';
+    confetti.style.bottom = '-20px';
+    confetti.style.left = `${Math.random() * 100}vw`;
+    confetti.style.opacity = Math.random() * 0.4 + 0.15; // Soft opacity
+    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+    
+    const duration = Math.random() * 10 + 8;
+    const drift = (Math.random() - 0.5) * 120;
+    
+    container.appendChild(confetti);
+
+    const animation = confetti.animate([
+      { transform: `translate(0, 0) rotate(0deg)`, opacity: confetti.style.opacity },
+      { transform: `translate(${drift}px, -110vh) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+    ], {
+      duration: duration * 1000,
+      easing: 'linear'
+    });
+
+    animation.onfinish = () => confetti.remove();
+  }
+
+  function createBalloon() {
+    if (document.hidden) return;
+    const balloon = document.createElement('div');
+    
+    const scale = Math.random() * 0.3 + 0.5; // Scale 0.5 to 0.8 to keep it soft
+    const balloonColor = colors[Math.floor(Math.random() * colors.length)];
+    
+    balloon.style.position = 'absolute';
+    balloon.style.bottom = '-120px';
+    balloon.style.left = `${Math.random() * 85 + 5}vw`;
+    balloon.style.opacity = '0.35'; // Very subtle overlay
+    balloon.style.transform = `scale(${scale})`;
+    
+    // Minimalist SVG Balloon
+    balloon.innerHTML = `
+      <svg width="60" height="75" viewBox="0 0 60 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="30" cy="30" rx="28" ry="30" fill="${balloonColor}"/>
+        <path d="M30 60L26 66H34L30 60Z" fill="${balloonColor}"/>
+        <path d="M30 66C30 70 28 72 28 75" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    `;
+    
+    container.appendChild(balloon);
+
+    const duration = Math.random() * 15 + 15; // 15s to 30s
+    const sway = Math.random() * 60 + 40;
+    
+    const animation = balloon.animate([
+      { transform: `translate(0, 0) scale(${scale})`, opacity: 0.35 },
+      { transform: `translate(${Math.sin(1) * sway}px, -40vh) scale(${scale})`, opacity: 0.35 },
+      { transform: `translate(${Math.sin(2) * sway}px, -80vh) scale(${scale})`, opacity: 0.35 },
+      { transform: `translate(${Math.sin(3) * sway}px, -115vh) scale(${scale})`, opacity: 0 }
+    ], {
+      duration: duration * 1000,
+      easing: 'ease-in-out'
+    });
+
+    animation.onfinish = () => balloon.remove();
+  }
+
+  // Pre-populate particles on start so page feels alive instantly
+  for (let i = 0; i < 12; i++) {
+    setTimeout(createConfetti, Math.random() * 6000);
+  }
+  for (let i = 0; i < 2; i++) {
+    setTimeout(createBalloon, Math.random() * 10000);
+  }
+
+  // Spawn loops
+  setInterval(createConfetti, 1500);
+  setInterval(createBalloon, 10000);
+}
