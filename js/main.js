@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initThemes();
   initTestimonialSlider();
   initPartyFloatingEffects();
+  initDarkMode();
 });
 
 let themes = [];
@@ -413,4 +414,37 @@ function initPartyFloatingEffects() {
   // Spawn loops
   setInterval(createConfetti, 1500);
   setInterval(createBalloon, 10000);
+}
+
+/* ===== DARK MODE CONTROLLER ===== */
+function initDarkMode() {
+  const toggleBtn = document.getElementById('themeToggleBtn');
+  if (!toggleBtn) return;
+
+  // Check saved theme or system preference
+  const savedTheme = localStorage.getItem('lumi_theme');
+  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+  setTheme(initialTheme);
+
+  toggleBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+  });
+
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('lumi_theme', theme);
+    
+    // Update button icon
+    if (theme === 'dark') {
+      toggleBtn.innerHTML = '☀️';
+      toggleBtn.setAttribute('title', 'Mudar para modo claro');
+    } else {
+      toggleBtn.innerHTML = '🌙';
+      toggleBtn.setAttribute('title', 'Mudar para modo escuro');
+    }
+  }
 }

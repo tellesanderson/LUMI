@@ -740,6 +740,9 @@
           <div class="admin-logo__badge" id="firebaseStatusBadge">Painel Admin</div>
         </a>
         <nav class="admin-nav">
+          <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Alternar modo escuro" style="margin-right: 0.5rem;">
+            🌙
+          </button>
           <div class="admin-nav__user" id="adminNavUser">Olá, <strong>Administrador</strong></div>
           <a href="index.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Ver Site</a>
           <button class="btn btn-secondary" id="logoutBtn" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Sair</button>
@@ -985,6 +988,7 @@
       updateFirebaseStatusUI();
       initAuth();
       initDashboard();
+      initDarkMode();
     });
 
     const isFb = typeof isFirebaseConfigured !== 'undefined' && isFirebaseConfigured;
@@ -1866,6 +1870,37 @@ const defaultThemes = ${JSON.stringify(adminThemes, null, 2)};
       setTimeout(() => {
         toast.classList.remove('active');
       }, 3500);
+    }
+
+    /* ===== DARK MODE CONTROLLER ===== */
+    function initDarkMode() {
+      const toggleBtn = document.getElementById('themeToggleBtn');
+      if (!toggleBtn) return;
+
+      const savedTheme = localStorage.getItem('lumi_theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+      setTheme(initialTheme);
+
+      toggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+      });
+
+      function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('lumi_theme', theme);
+        
+        if (theme === 'dark') {
+          toggleBtn.innerHTML = '☀️';
+          toggleBtn.setAttribute('title', 'Mudar para modo claro');
+        } else {
+          toggleBtn.innerHTML = '🌙';
+          toggleBtn.setAttribute('title', 'Mudar para modo escuro');
+        }
+      }
     }
   </script>
 </body>
