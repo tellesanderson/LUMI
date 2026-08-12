@@ -3,8 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="LUMI Decorações - Locação de decoração para festas de aniversário infantil em Curitiba e Pinhais. Temas encantadores, montagem e desmontagem inclusos. Solicite seu orçamento!">
+<meta name="description" content="LUMI Decorações - Locação de decoração para festas de aniversário infantil em Curitiba e Pinhais. Temas encantadores estilo Pegue e Monte. Solicite seu orçamento!">
 <title>LUMI Decorações | Festas Infantis em Curitiba e Pinhais</title>
+<link rel="icon" type="image/svg+xml" href="img/Lumi.svg">
+
+<!-- Open Graph / Meta Tags Sociais -->
+<meta property="og:title" content="LUMI Decorações | Festas Infantis em Curitiba e Pinhais">
+<meta property="og:description" content="Kits decorativos Pegue e Monte para festas infantis em Curitiba e Pinhais. Escolha o tema perfeito e solicite seu orçamento via WhatsApp!">
+<meta property="og:image" content="img/LUMIM.jpeg">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- SEO Estruturado Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "LUMI Decorações",
+  "image": "img/LUMIM.jpeg",
+  "description": "Locação de kits de decoração Pegue e Monte para festas infantis em Curitiba e Pinhais.",
+  "telephone": "+55-41-99844-5947",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Curitiba e Pinhais",
+    "addressRegion": "PR",
+    "addressCountry": "BR"
+  },
+  "sameAs": [
+    "https://www.instagram.com/lumidecoracoesoficial"
+  ]
+}
+</script>
+
 <link rel="stylesheet" href="css/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +51,8 @@
       <ul class="nav__list">
         <li><a href="#temas" class="nav__link">Temas</a></li>
         <li><a href="#como-funciona" class="nav__link">Como Funciona</a></li>
-        <li><a href="#galeria" class="nav__link">Galeria</a></li>
+        <li><a href="#simulador" class="nav__link">Simulador</a></li>
+        <li><a href="#faq" class="nav__link">FAQ</a></li>
         <li><a href="#depoimentos" class="nav__link">Depoimentos</a></li>
       </ul>
       <a href="https://wa.me/5541998445947?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20orçamento." class="btn-cta btn-cta--sm nav__cta" target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
@@ -38,7 +70,8 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="#temas">Temas</a>
   <a href="#como-funciona">Como Funciona</a>
-  <a href="#galeria">Galeria</a>
+  <a href="#simulador">Simulador</a>
+  <a href="#faq">FAQ</a>
   <a href="#depoimentos">Depoimentos</a>
   <a href="https://wa.me/5541998445947?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20orçamento." class="btn-cta">Solicitar Orçamento</a>
 </div>
@@ -75,6 +108,13 @@
       <span class="section__subtitle">Nossos Temas</span>
       <h2>Escolha o tema perfeito para a festa</h2>
       <p id="themesSubtitle">Carregando temas encantadores para crianças de 1 a 10 anos...</p>
+    </div>
+    <div class="theme-search-box fade-up">
+      <div class="search-input-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="themeSearchInput" placeholder="Buscar tema (ex: Stitch, Homem Aranha, Roblox...)" aria-label="Buscar tema por nome">
+        <button id="clearSearchBtn" class="search-clear-btn" aria-label="Limpar busca" style="display: none;">✕</button>
+      </div>
     </div>
     <div class="theme-filters fade-up" id="themeFilters">
       <button class="theme-filters__btn active" data-filter="todos">Todos</button>
@@ -179,6 +219,49 @@
   </div>
 </section>
 
+<!-- SIMULADOR DE ORÇAMENTO -->
+<section class="section section--white" id="simulador">
+  <div class="container">
+    <div class="simulator-card fade-up">
+      <div class="section__header">
+        <span class="section__subtitle">Simulador Expresso</span>
+        <h2>Monte seu Orçamento em Segundos</h2>
+        <p>Preencha os detalhes da festa e receba o orçamento personalizado direto no seu WhatsApp.</p>
+      </div>
+      <form id="simulatorForm" class="simulator-form" onsubmit="handleSimulatorSubmit(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="simTheme">Tema Desejado</label>
+            <select id="simTheme" required>
+              <option value="">Selecione um tema...</option>
+              <!-- Preenchido via JS -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="simDate">Data do Evento</label>
+            <input type="date" id="simDate" required>
+          </div>
+          <div class="form-group">
+            <label for="simCity">Cidade / Localização</label>
+            <select id="simCity" required>
+              <option value="Curitiba - PR">Curitiba - PR</option>
+              <option value="Pinhais - PR">Pinhais - PR</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="simNeighborhood">Bairro (opcional)</label>
+            <input type="text" id="simNeighborhood" placeholder="Ex: Água Verde, Centro...">
+          </div>
+        </div>
+        <button type="submit" class="btn-cta btn-cta--lg btn-whatsapp" style="margin-top: 1rem;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.134.558 4.133 1.532 5.874L.057 23.886a.5.5 0 00.606.641l6.218-1.625A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.563 9.563 0 01-4.861-1.327l-.349-.207-3.617.945.974-3.514-.228-.361A9.555 9.555 0 012.4 12C2.4 6.699 6.699 2.4 12 2.4S21.6 6.699 21.6 12 17.301 21.6 12 21.6z"/></svg>
+          Gerar Orçamento no WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- DEPOIMENTOS -->
 <section class="section section--white" id="depoimentos">
   <div class="container">
@@ -237,6 +320,64 @@
       <button class="testimonials-dots__dot" aria-label="Depoimento 3"></button>
       <button class="testimonials-dots__dot" aria-label="Depoimento 4"></button>
       <button class="testimonials-dots__dot" aria-label="Depoimento 5"></button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ (PERGUNTAS FREQUENTES) -->
+<section class="section section--cream" id="faq">
+  <div class="container">
+    <div class="section__header fade-up">
+      <span class="section__subtitle">Tire suas dúvidas</span>
+      <h2>Perguntas Frequentes</h2>
+      <p>Tudo o que você precisa saber sobre o nosso kit de decoração Pegue e Monte.</p>
+    </div>
+    <div class="faq-accordion fade-up">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Como funciona a modalidade Pegue e Monte?</span>
+          <span class="faq-icon">❯</span>
+        </button>
+        <div class="faq-answer">
+          <p>Você escolhe o kit completo do tema no nosso catálogo, confirma a reserva pelo WhatsApp, retira o kit no nosso ponto de atendimento em Curitiba ou Pinhais, realiza a montagem no local da sua festa e nos devolve após o evento. É simples, prático e muito mais econômico!</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>O que vem incluído no kit de decoração?</span>
+          <span class="faq-icon">❯</span>
+        </button>
+        <div class="faq-answer">
+          <p>Nossos kits contêm toda a estrutura principal do tema: painel decorativo (com estrutura e tecido impresso/sublimado), capas de cilindros ou mesas articuladas, louças decorativas para doces, vasos com arranjos, displays dos personagens e elementos temáticos complementares.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Quais as regiões atendidas?</span>
+          <span class="faq-icon">❯</span>
+        </button>
+        <div class="faq-answer">
+          <p>Atendemos clientes das cidades de <strong>Curitiba e Pinhais — PR</strong>. A retirada e devolução acontecem no nosso local agendado.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Qual é o prazo para retirada e devolução do kit?</span>
+          <span class="faq-icon">❯</span>
+        </button>
+        <div class="faq-answer">
+          <p>Normalmente a retirada é agendada para a véspera ou manhã do dia da festa, e a devolução no primeiro dia útil após o evento, com horários flexíveis alinhados previamente via WhatsApp.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>É difícil montar a decoração sozinho(a)?</span>
+          <span class="faq-icon">❯</span>
+        </button>
+        <div class="faq-answer">
+          <p>Não! Nossos kits são pensados exatamente para facilitar a vida dos pais. As estruturas são leves, dobráveis/desmontáveis e enviamos orientações de montagem se você precisar.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>

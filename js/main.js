@@ -9,9 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initTestimonialSlider();
   initPartyFloatingEffects();
   initDarkMode();
+  initFaqAccordion();
+  initThemeSearch();
+  initKeyboardAndSwipe();
 });
 
 let themes = [];
+let currentFilterCategory = 'todos';
+let currentSearchQuery = '';
 
 // Helper to escape HTML characters (XSS Prevention)
 function escapeHTML(str) {
@@ -29,6 +34,9 @@ function initThemes() {
   const themeGrid = document.getElementById('themeGrid');
   if (!themeGrid) return;
 
+  // Renderiza Skeleton Loaders enquanto carrega os dados
+  renderSkeletons(themeGrid);
+
   if (typeof isFirebaseConfigured !== 'undefined' && isFirebaseConfigured) {
     // Carrega do Firebase Firestore
     db.collection('themes').get()
@@ -39,27 +47,46 @@ function initThemes() {
         });
         
         if (fetchedThemes.length > 0) {
-          // Ordena por título ou data de criação
           themes = fetchedThemes.sort((a, b) => {
             if (a.createdAt && b.createdAt) return a.createdAt - b.createdAt;
             return a.title.localeCompare(b.title);
           });
           renderThemeGrid();
+          populateSimulatorThemes();
         } else {
           console.log("Banco Firestore vazio. Carregando padrões locais...");
           loadLocalThemes();
           renderThemeGrid();
+          populateSimulatorThemes();
         }
       })
       .catch((error) => {
         console.error("Erro ao carregar do Firestore, usando fallback local:", error);
         loadLocalThemes();
         renderThemeGrid();
+        populateSimulatorThemes();
       });
   } else {
     // Firebase não configurado, roda localmente
     loadLocalThemes();
     renderThemeGrid();
+    populateSimulatorThemes();
+  }
+}
+
+function renderSkeletons(container) {
+  container.innerHTML = '';
+  for (let i = 0; i < 6; i++) {
+    const skel = document.createElement('div');
+    skel.className = 'skeleton-card';
+    skel.innerHTML = `
+      <div class="skeleton-img"></div>
+      <div class="skeleton-content">
+        <div class="skeleton-title"></div>
+        <div class="skeleton-btn"></div>
+      </div>
+    `;
+    container.appendChild(skel);
   }
 }
 
@@ -89,6 +116,8 @@ function renderThemeGrid() {
     themesSubtitle.innerHTML = `<strong>${themes.length} temas</strong> encantadores para crianças de 1 a 10 anos. Cada kit Pegue e Monte vem com toda a decoração completa para você retirar, decorar e devolver!`;
   }
 
+  const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="300" height="200" fill="%23F6AFCB"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="20" fill="white">LUMI Decorações</text></svg>`;
+
   themes.forEach((theme, index) => {
     const delayClass = `fade-up-delay-${index % 4}`;
     const card = document.createElement('div');
@@ -96,11 +125,7 @@ function renderThemeGrid() {
     card.dataset.category = theme.category;
     
     const safeTitle = escapeHTML(theme.title);
-    let imageSrc = theme.coverImage || theme.image || '';
-    
-    if (!imageSrc) {
-      imageSrc = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="300" height="200" fill="%23F6AFCB"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="'Baloo 2', cursive" font-size="24" fill="white">${safeTitle}</text></svg>`;
-    }
+    let imageSrc = theme.coverImage || theme.image || fallbackSvg;
 
     const whatsappMessage = encodeURIComponent(`Olá! Tenho interesse no kit Pegue e Monte do tema ${theme.title}. Gostaria de consultar a disponibilidade para a data...`);
     const whatsappLink = `https://wa.me/5541998445947?text=${whatsappMessage}`;
@@ -110,7 +135,7 @@ function renderThemeGrid() {
 
     card.innerHTML = `
       <div class="theme-card__image" onclick="openGallery('${theme.id}')" style="cursor:pointer">
-        <img src="${imageSrc}" alt="Tema ${safeTitle}" loading="lazy">
+        <img src="${imageSrc}" alt="Tema ${safeTitle}" loading="lazy" onerror="this.onerror=null;this.src='${fallbackSvg}';">
         ${galleryIcon}
       </div>
       <div class="theme-card__content">
@@ -121,9 +146,64 @@ function renderThemeGrid() {
     themeGrid.appendChild(card);
   });
 
-  // Inicializa filtros e animações após injetar os cartões
+  // Inicializa filtros, busca e animações após injetar os cartões
   initThemeFilters();
+  filterThemes();
   initScrollAnimations();
+}
+
+/* ===== Theme Search ===== */
+function initThemeSearch() {
+  const input = document.getElementById('themeSearchInput');
+  const clearBtn = document.getElementById('clearSearchBtn');
+  if (!input) return;
+
+  input.addEventListener('input', (e) => {
+    currentSearchQuery = e.target.value.trim().toLowerCase();
+    if (clearBtn) clearBtn.style.display = currentSearchQuery ? 'block' : 'none';
+    filterThemes();
+  });
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      currentSearchQuery = '';
+      clearBtn.style.display = 'none';
+      filterThemes();
+    });
+  }
+}
+
+/* ===== Combined Filter Logic ===== */
+function filterThemes() {
+  const cards = document.querySelectorAll('.theme-card');
+  cards.forEach(card => {
+    const categoryMatch = currentFilterCategory === 'todos' || card.dataset.category === currentFilterCategory;
+    const titleText = card.querySelector('.theme-card__title')?.textContent.toLowerCase() || '';
+    const textMatch = !currentSearchQuery || titleText.includes(currentSearchQuery);
+
+    if (categoryMatch && textMatch) {
+      card.classList.remove('hidden');
+      card.style.animation = 'fadeIn .4s ease forwards';
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+}
+
+/* ===== Theme Filters ===== */
+function initThemeFilters() {
+  const buttons = document.querySelectorAll('.theme-filters__btn');
+  if (!buttons.length) return;
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilterCategory = btn.dataset.filter;
+      filterThemes();
+    });
+  });
 }
 
 /* ===== Sticky Header ===== */
@@ -448,3 +528,74 @@ function initDarkMode() {
     }
   }
 }
+
+/* ===== SIMULATOR LOGIC ===== */
+function populateSimulatorThemes() {
+  const simSelect = document.getElementById('simTheme');
+  if (!simSelect || !themes.length) return;
+  
+  simSelect.innerHTML = '<option value="">Selecione um tema...</option>';
+  themes.forEach(t => {
+    const opt = document.createElement('option');
+    opt.value = t.title;
+    opt.textContent = t.title;
+    simSelect.appendChild(opt);
+  });
+}
+
+window.handleSimulatorSubmit = function(event) {
+  event.preventDefault();
+  const theme = document.getElementById('simTheme')?.value;
+  const dateVal = document.getElementById('simDate')?.value;
+  const city = document.getElementById('simCity')?.value;
+  const neighborhood = document.getElementById('simNeighborhood')?.value;
+
+  if (!theme || !dateVal) return;
+
+  let formattedDate = dateVal;
+  if (dateVal.includes('-')) {
+    const parts = dateVal.split('-');
+    formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
+  }
+
+  let locationStr = city;
+  if (neighborhood) locationStr += ` (${neighborhood})`;
+
+  const msg = `Olá LUMI! Vim pelo site e gostaria de solicitar um orçamento para o tema *${theme}* na data *${formattedDate}* em *${locationStr}*.`;
+  const link = `https://wa.me/5541998445947?text=${encodeURIComponent(msg)}`;
+  window.open(link, '_blank');
+};
+
+/* ===== FAQ ACCORDION LOGIC ===== */
+function initFaqAccordion() {
+  const questions = document.querySelectorAll('.faq-question');
+  questions.forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isActive = item.classList.contains('active');
+      
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('active');
+        i.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+      });
+      
+      if (!isActive) {
+        item.classList.add('active');
+        q.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+}
+
+/* ===== ACCESSIBILITY: KEYBOARD & SWIPE FOR MODAL ===== */
+function initKeyboardAndSwipe() {
+  document.addEventListener('keydown', (e) => {
+    const modal = document.getElementById('galleryModal');
+    if (!modal || !modal.classList.contains('active')) return;
+
+    if (e.key === 'Escape') closeGallery();
+    else if (e.key === 'ArrowLeft') changeSlide(-1);
+    else if (e.key === 'ArrowRight') changeSlide(1);
+  });
+}
+
