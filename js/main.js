@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let themes = [];
-let currentFilterCategory = 'todos';
 let currentSearchQuery = '';
 
 // Helper to escape HTML characters (XSS Prevention)
@@ -146,8 +145,7 @@ function renderThemeGrid() {
     themeGrid.appendChild(card);
   });
 
-  // Inicializa filtros, busca e animações após injetar os cartões
-  initThemeFilters();
+  // Inicializa busca e animações após injetar os cartões
   filterThemes();
   initScrollAnimations();
 }
@@ -174,35 +172,19 @@ function initThemeSearch() {
   }
 }
 
-/* ===== Combined Filter Logic ===== */
+/* ===== Search Filter Logic ===== */
 function filterThemes() {
   const cards = document.querySelectorAll('.theme-card');
   cards.forEach(card => {
-    const categoryMatch = currentFilterCategory === 'todos' || card.dataset.category === currentFilterCategory;
     const titleText = card.querySelector('.theme-card__title')?.textContent.toLowerCase() || '';
     const textMatch = !currentSearchQuery || titleText.includes(currentSearchQuery);
 
-    if (categoryMatch && textMatch) {
+    if (textMatch) {
       card.classList.remove('hidden');
       card.style.animation = 'fadeIn .4s ease forwards';
     } else {
       card.classList.add('hidden');
     }
-  });
-}
-
-/* ===== Theme Filters ===== */
-function initThemeFilters() {
-  const buttons = document.querySelectorAll('.theme-filters__btn');
-  if (!buttons.length) return;
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentFilterCategory = btn.dataset.filter;
-      filterThemes();
-    });
   });
 }
 
