@@ -150,6 +150,70 @@ function renderThemeGrid() {
   initScrollAnimations();
 }
 
+/* ===== FUZZY SEARCH UTILITIES (Tolerante a erros de digitação) ===== */
+function normalizeText(str) {
+  if (!str) return '';
+  return String(str)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s]/g, "");
+}
+
+function levenshtein(a, b) {
+  if (a.length === 0) return b.length;
+  if (b.length === 0) return a.length;
+
+  const matrix = [];
+  for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+  for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1,
+          matrix[i][j - 1] + 1,
+          matrix[i - 1][j] + 1
+        );
+      }
+    }
+  }
+  return matrix[b.length][a.length];
+}
+
+function isFuzzyMatch(queryText, titleText) {
+  const normQuery = normalizeText(queryText).trim();
+  const normTitle = normalizeText(titleText).trim();
+
+  if (!normQuery) return true;
+  if (normTitle.includes(normQuery)) return true;
+
+  const queryWords = normQuery.split(/\s+/);
+  const titleWords = normTitle.split(/\s+/);
+
+  return queryWords.every(qWord => {
+    if (normTitle.includes(qWord)) return true;
+
+    return titleWords.some(tWord => {
+      const maxDistance = qWord.length <= 3 ? 1 : (qWord.length <= 6 ? 2 : 3);
+      if (Math.abs(tWord.length - qWord.length) <= maxDistance) {
+        if (levenshtein(qWord, tWord) <= maxDistance) return true;
+      }
+
+      if (tWord.length > qWord.length) {
+        for (let i = 0; i <= tWord.length - qWord.length; i++) {
+          const sub = tWord.substring(i, i + qWord.length);
+          if (levenshtein(qWord, sub) <= 1) return true;
+        }
+      }
+      return false;
+    });
+  });
+}
+
 /* ===== Theme Search ===== */
 function initThemeSearch() {
   const input = document.getElementById('themeSearchInput');
@@ -157,7 +221,7 @@ function initThemeSearch() {
   if (!input) return;
 
   input.addEventListener('input', (e) => {
-    currentSearchQuery = e.target.value.trim().toLowerCase();
+    currentSearchQuery = e.target.value;
     if (clearBtn) clearBtn.style.display = currentSearchQuery ? 'block' : 'none';
     filterThemes();
   });
@@ -175,17 +239,40 @@ function initThemeSearch() {
 /* ===== Search Filter Logic ===== */
 function filterThemes() {
   const cards = document.querySelectorAll('.theme-card');
+  const themeGrid = document.getElementById('themeGrid');
+  let visibleCount = 0;
+
   cards.forEach(card => {
-    const titleText = card.querySelector('.theme-card__title')?.textContent.toLowerCase() || '';
-    const textMatch = !currentSearchQuery || titleText.includes(currentSearchQuery);
+    const titleText = card.querySelector('.theme-card__title')?.textContent || '';
+    const textMatch = isFuzzyMatch(currentSearchQuery, titleText);
 
     if (textMatch) {
       card.classList.remove('hidden');
       card.style.animation = 'fadeIn .4s ease forwards';
+      visibleCount++;
     } else {
       card.classList.add('hidden');
     }
   });
+
+  // Exibe mensagem caso nenhum tema corresponda à busca
+  let noResultsMsg = document.getElementById('noResultsMsg');
+  if (themeGrid) {
+    if (!noResultsMsg) {
+      noResultsMsg = document.createElement('div');
+      noResultsMsg.id = 'noResultsMsg';
+      noResultsMsg.className = 'no-results-msg';
+      themeGrid.parentNode.insertBefore(noResultsMsg, themeGrid.nextSibling);
+    }
+
+    if (visibleCount === 0 && currentSearchQuery.trim()) {
+      const safeQuery = escapeHTML(currentSearchQuery);
+      noResultsMsg.innerHTML = `🎈 Nenhum tema encontrado para "<strong>${safeQuery}</strong>". Tente buscar por <em>Stitch, Homem Aranha, Roblox, Trolls...</em>`;
+      noResultsMsg.style.display = 'block';
+    } else {
+      noResultsMsg.style.display = 'none';
+    }
+  }
 }
 
 /* ===== Sticky Header ===== */

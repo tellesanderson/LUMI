@@ -873,5 +873,27 @@ p{color:var(--text-sec);line-height:1.7}
   color: #b0b0c0;
 }
 
+/* =============================================
+   NO RESULTS FEEDBACK
+   ============================================= */
+.no-results-msg {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  color: var(--text-sec);
+  font-size: 1.05rem;
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-top: 1.5rem;
+  border: 1px solid rgba(246, 175, 203, 0.2);
+}
+
+[data-theme="dark"] .no-results-msg {
+  background: #1c1c27;
+  color: #b0b0c0;
+  border-color: #333347;
+}
+
+
 
 
