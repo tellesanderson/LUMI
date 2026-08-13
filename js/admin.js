@@ -365,12 +365,15 @@ function renderDashboardTable() {
     const safeTitle = escapeHTML(theme.title);
     const safeCategory = escapeHTML(theme.category);
     let imageSrc = theme.coverImage || theme.image || '';
+    if (imageSrc && typeof imageSrc === 'string' && imageSrc.startsWith('img/themes/') && imageSrc.endsWith('.png')) {
+      imageSrc = imageSrc.replace(/\.png$/i, '.webp');
+    }
     if (!imageSrc) {
       imageSrc = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"><rect width="60" height="60" fill="%23F6AFCB"/></svg>`;
     }
 
     tr.innerHTML = `
-      <td><img src="${imageSrc}" class="theme-row-img" alt="Pre-view"></td>
+      <td><img src="${imageSrc}" class="theme-row-img" alt="Pre-view" onerror="if(this.src.endsWith('.webp')){this.src=this.src.replace(/\.webp$/,'.png');}else if(this.src.endsWith('.png')){this.src=this.src.replace(/\.png$/,'.webp');}"></td>
       <td><strong>${safeTitle}</strong></td>
       <td><span class="badge badge-${safeCategory}">${safeCategory}</span></td>
       <td>

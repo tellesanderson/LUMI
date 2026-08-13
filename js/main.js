@@ -125,6 +125,9 @@ function renderThemeGrid() {
     
     const safeTitle = escapeHTML(theme.title);
     let imageSrc = theme.coverImage || theme.image || fallbackSvg;
+    if (imageSrc && typeof imageSrc === 'string' && imageSrc.startsWith('img/themes/') && imageSrc.endsWith('.png')) {
+      imageSrc = imageSrc.replace(/\.png$/i, '.webp');
+    }
 
     const whatsappMessage = encodeURIComponent(`Olá! Tenho interesse no kit Pegue e Monte do tema ${theme.title}. Gostaria de consultar a disponibilidade para a data...`);
     const whatsappLink = `https://wa.me/5541998445947?text=${whatsappMessage}`;
@@ -134,7 +137,7 @@ function renderThemeGrid() {
 
     card.innerHTML = `
       <div class="theme-card__image" onclick="openGallery('${theme.id}')" style="cursor:pointer">
-        <img src="${imageSrc}" alt="Tema ${safeTitle}" loading="lazy" onerror="this.onerror=null;this.src='${fallbackSvg}';">
+        <img src="${imageSrc}" alt="Tema ${safeTitle}" loading="lazy" onerror="if(this.src.endsWith('.webp')){this.src=this.src.replace(/\.webp$/,'.png');}else if(this.src.endsWith('.png')){this.src=this.src.replace(/\.png$/,'.webp');}else{this.onerror=null;this.src='${fallbackSvg}';}">
         ${galleryIcon}
       </div>
       <div class="theme-card__content">
